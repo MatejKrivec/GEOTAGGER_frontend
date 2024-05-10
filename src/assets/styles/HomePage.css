@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+.HomeBTN, .SettingsBTN, .logoutBTN {
+    font-weight: bold;
+    padding: 2px 4px;
+    border-radius: 2px;
+    margin-right: 2px;
+    color: black;
+  }
+  
+  .HomeBTN:hover, .SettingsBTN:hover, .logoutBTN:hover {
+    background-color: green;
+    color: white;
+  }
+  
+  .HomeBTN.bg-blue-500.border-b-2.border-black {
+    background-color: blue;
+    border-bottom: 2px solid black;
+  }
+  
+  .SettingsBTN.bg-blue-500.border-b-2.border-black {
+    background-color: blue;
+    border-bottom: 2px solid black;
+  }
+  
+  .logoutBTN.bg-blue-500.border-b-2.border-black {
+    background-color: blue;
+    border-bottom: 2px solid black;
+  }*/
