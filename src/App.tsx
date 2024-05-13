@@ -5,6 +5,8 @@ import SignIn from './pages/Auth/SignIn';
 import SignUp from './pages/Auth/SignUp';
 import HomePage from './pages/HomePage';
 import Cookies from 'js-cookie';
+import ForgotPassword from './pages/Auth/ForgotPassword';
+import ResetPassword from './pages/Auth/ResetPassword';
 
 function App() {
 
@@ -14,6 +16,9 @@ function App() {
         <Route path="/" element={<InitPage />} />
         <Route path="/Signin" element={<SignIn />} />
         <Route path="/Signup" element={<SignUp />} />
+        <Route path="/ForgotPassword" element={<ForgotPassword />} />
+        <Route path="/ResetPassword" element={<ResetPassword />} />
+
         
 
         <Route element={<RouteGuard  />}>

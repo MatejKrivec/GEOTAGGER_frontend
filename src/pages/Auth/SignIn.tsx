@@ -101,7 +101,9 @@ const SignIn = () => {
             <input className='border rounded-lg px-2 py-1 mb-2 w-full ' name='email' type="email"  onChange={handleChange} required/>
 
             <label htmlFor="password">Password</label>
-            <input className='border rounded-lg px-2 py-1 mb-2 w-full' name='password' type="password" onChange={handleChange} required/>
+            <input className='border rounded-lg px-2 py-1 mb-1  w-full' name='password' type="password" onChange={handleChange} required/>
+
+            <Link className='SignUpToLoginLink text-green-400 self-end mb-3 hover:text-blue-400' to="/ForgotPassword">Forgot password</Link>
 
             <button className='bg-green-400 text-white font-bold py-2 px-4 mb-2 w-full rounded-xl '>Sign in</button>
             <button className='border text-black font-bold py-2 px-4 mb-2 w-full rounded-xl flex justify-center items-center'>
@@ -113,7 +115,7 @@ const SignIn = () => {
 
             <div className="flex justify-between">
             <p>Do you want to create an account?</p>
-            <Link className='SignUpToLoginLink text-green-400' to="/Signup">Sign in</Link>
+            <Link className='SignUpToLoginLink text-green-400 hover:text-blue-400' to="/Signup">Sign in</Link>
             </div>
         </form>
         </div>
