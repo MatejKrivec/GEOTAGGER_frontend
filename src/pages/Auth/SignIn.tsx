@@ -115,7 +115,7 @@ const SignIn = () => {
 
             <div className="flex justify-between">
             <p>Do you want to create an account?</p>
-            <Link className='SignUpToLoginLink text-green-400 hover:text-blue-400' to="/Signup">Sign in</Link>
+            <Link className='SignUpToLoginLink text-green-400 hover:text-blue-400' to="/Signup">Sign up</Link>
             </div>
         </form>
         </div>

@@ -5,11 +5,15 @@ import Logout from './ProfileSettings/Logout';
 import Profile from './Home/Profile';
 import '../assets/styles/HomePage.css';
 import Cookies from 'js-cookie';
+//import S3 from 'react-aws-s3-typescript'
+//import { S3 } from 'aws-sdk';
 
 const HomePage = () => {
   const [showSettingsPopup, setShowSettingsPopup] = useState(false);
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
   const [activeTab, setActiveTab] = useState('homeLanding');
+  const [profilePic, setProfilePic] = useState('');
+  
 
   useEffect(() => {
     const token = Cookies.get('token');
@@ -20,6 +24,17 @@ const HomePage = () => {
       console.error('Token not found');
     }
   },[] );
+
+ /* const s3 = new S3({
+    region: 'eu-north-1', // replace with your bucket region
+    accessKeyId: 'AKIAZQ3DQ2WHT2PHVMNB', // replace with your access key id
+    secretAccessKey: '0nGgt3udpCPHSX/pjvDkTCgC8PW2jbd0XLpo0+uB' // replace with your secret access key
+  });
+
+  const params = {
+    Bucket: 'geotagger', // replace with your bucket name
+    Key: 'UserImages/default_user_pic.jpg' // replace with the object key of your image
+  };*/
 
   const GetUserData = async (token: string) => {
     // Use the token passed as an argument
@@ -40,13 +55,36 @@ const HomePage = () => {
       }
       
       const userData = await response.json();
+      console.log(userData)
       const userId = userData.id;
+      const pofilePicture = userData.profilePic;
+
+      const data = await fetch(`http://localhost:3000/users/${userId}`)
+      const user = await data.json()
+      
+      if (!data.ok) {
+        throw new Error('Failed to decode token');
+      }
+
+      console.log("Profile picture: "+user.profilePic)
+      setProfilePic(user.profilePic)
+
+     /* const fetchImage = () => {
+        const ReactS3Client = new S3({
+          accessKeyId: "",
+
+        })
+        ReactS3Client.listFiles
+      }*/
+     // setProfilePic(pofilePicture)
+      console.log("dsdasdsdasdas "+pofilePicture)
+      console.log("dsdasdsdasdas "+userId)
       localStorage.setItem('UserId', userId);
 
-      const userResponse = await fetch(`http://localhost:3000/users/${userId}`);
-      if (!userResponse.ok) {
-        throw new Error('Failed to fetch user data');
-      }
+     /* s3.getSignedUrl('getObject', params, (err, url) => {
+        if (err) console.log(err);
+        else setProfilePic(url);
+      });*/
     } catch (error) {
       console.log(error)
       //toast.error((error as Error).message);
@@ -79,6 +117,7 @@ const HomePage = () => {
 
   const closeSettingsPopup = () => {
     setShowSettingsPopup(!showSettingsPopup);
+    location.reload()
   };
   const closeLogoutPopup = () => {
     setShowLogoutPopup(!showLogoutPopup);
@@ -113,8 +152,8 @@ const HomePage = () => {
 
             <div className=" border-2 border-green-400 flex items-center rounded-full mr-5">
               <img onClick={() => handleTabChange('profile')} 
-              
-              src="src\assets\images\default_user_pic.jpg" alt="DefaultUserPic" className=" w-[4rem] rounded-full cursor-pointer" />
+              src={profilePic} alt="DefaultUserPic" className=" w-[4rem] h-[4rem] rounded-full cursor-pointer" />
+
               <p className=" ml-5 mr-8">10</p>
             </div>
 
