@@ -18,26 +18,14 @@ const HomePage = () => {
   useEffect(() => {
     const token = Cookies.get('token');
     if (token) {
-      // Call the SetUserData method if token exists
       GetUserData(token);
     } else {
       console.error('Token not found');
     }
   },[] );
 
- /* const s3 = new S3({
-    region: 'eu-north-1', // replace with your bucket region
-    accessKeyId: 'AKIAZQ3DQ2WHT2PHVMNB', // replace with your access key id
-    secretAccessKey: '0nGgt3udpCPHSX/pjvDkTCgC8PW2jbd0XLpo0+uB' // replace with your secret access key
-  });
-
-  const params = {
-    Bucket: 'geotagger', // replace with your bucket name
-    Key: 'UserImages/default_user_pic.jpg' // replace with the object key of your image
-  };*/
 
   const GetUserData = async (token: string) => {
-    // Use the token passed as an argument
     
     try {
       const response = await fetch('http://localhost:3000/decode', {
@@ -55,7 +43,7 @@ const HomePage = () => {
       }
       
       const userData = await response.json();
-      console.log(userData)
+
       const userId = userData.id;
       const pofilePicture = userData.profilePic;
 
@@ -66,25 +54,11 @@ const HomePage = () => {
         throw new Error('Failed to decode token');
       }
 
-      console.log("Profile picture: "+user.profilePic)
       setProfilePic(user.profilePic)
 
-     /* const fetchImage = () => {
-        const ReactS3Client = new S3({
-          accessKeyId: "",
-
-        })
-        ReactS3Client.listFiles
-      }*/
-     // setProfilePic(pofilePicture)
-      console.log("dsdasdsdasdas "+pofilePicture)
-      console.log("dsdasdsdasdas "+userId)
       localStorage.setItem('UserId', userId);
 
-     /* s3.getSignedUrl('getObject', params, (err, url) => {
-        if (err) console.log(err);
-        else setProfilePic(url);
-      });*/
+
     } catch (error) {
       console.log(error)
       //toast.error((error as Error).message);
@@ -102,7 +76,7 @@ const HomePage = () => {
             );
         } else if (activeTab === 'profile') {
             return (
-                <Profile/>
+                <Profile profilePic={profilePic}/>
             );
         }
     };

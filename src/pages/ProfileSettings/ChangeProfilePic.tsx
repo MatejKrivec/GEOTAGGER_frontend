@@ -37,6 +37,9 @@ const ChangeProfilePic = ({ onClose, onConfirmClose }: { onClose: () => void; on
   
       const IDuser = localStorage.getItem('UserId')!; // Type assertion with `!`
       formData.append('userId', IDuser);
+
+      const key = 'UserImages/'
+      formData.append('key', key);
   
       const response = await fetch('http://localhost:3000/aws/upload-profile-pic', {
         method: 'POST',
