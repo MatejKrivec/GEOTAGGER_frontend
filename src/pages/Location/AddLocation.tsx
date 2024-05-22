@@ -67,6 +67,23 @@ const AddLocation = ({Close}: {Close: () => void}) => {
                 throw new Error('Failed to create user');
             }
 
+            const userID = localStorage.getItem('UserId');
+            const points = 10
+
+            const updateResponse = await fetch(`http://localhost:3000/users/addUserPoints/${userID}`, {
+                method: 'PATCH',
+                headers: {
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ points })
+            });
+        
+            if (!updateResponse.ok) {
+                throw new Error('Error updating user points');
+            }
+        
+            console.log('User points updated successfully');
+
             
         } catch (error) {
             

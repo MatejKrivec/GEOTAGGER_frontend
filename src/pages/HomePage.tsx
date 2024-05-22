@@ -11,8 +11,9 @@ import Cookies from 'js-cookie';
 const HomePage = () => {
   const [showSettingsPopup, setShowSettingsPopup] = useState(false);
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
-  const [activeTab, setActiveTab] = useState('homeLanding');
+  const [activeTab, setActiveTab] = useState('profile');
   const [profilePic, setProfilePic] = useState('');
+  const [points, setPoints] = useState(0);
   
 
   useEffect(() => {
@@ -46,6 +47,7 @@ const HomePage = () => {
 
       const userId = userData.id;
       const pofilePicture = userData.profilePic;
+      
 
       const data = await fetch(`http://localhost:3000/users/${userId}`)
       const user = await data.json()
@@ -58,6 +60,8 @@ const HomePage = () => {
 
       localStorage.setItem('UserId', userId);
 
+      setPoints(user.points)
+      console.log("user points:"+ user.points)
 
     } catch (error) {
       console.log(error)
@@ -128,7 +132,7 @@ const HomePage = () => {
               <img onClick={() => handleTabChange('profile')} 
               src={profilePic} alt="DefaultUserPic" className=" w-[4rem] h-[4rem] rounded-full cursor-pointer" />
 
-              <p className=" ml-5 mr-8">10</p>
+              <p className=" ml-5 mr-8">{points}</p>
             </div>
 
             <button className="text-[2rem] text-white bg-green-400 rounded-full w-[3.5rem] pb-2">+</button>
