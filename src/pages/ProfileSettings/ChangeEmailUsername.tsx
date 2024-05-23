@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react'
 import ChangePassword from './ChangePassword'
 import ChangeProfilePic from './ChangeProfilePic'
 import Conformation from './Conformation'
+import { toast, ToastContainer } from 'react-toastify'; 
 
-const ChangeEmapilUsername = ({onClose}: {onClose: () => void}) => {
+const ChangeEmapilUsername = ({onClose,onCloseClick}: {onClose: () => void,onCloseClick: () => void}) => {
 
     const [showChangePasswordPopup, setShowChangePasswordPopup] = useState(false)
     const [showChangeProfilePicPopup, setShowChangeProfilePicPopup] = useState(false)
@@ -57,12 +58,14 @@ const ChangeEmapilUsername = ({onClose}: {onClose: () => void}) => {
             })
             if (!response.ok) {
                 console.log('Error updating user')
+                toast.error('Error updating user')
                 throw new Error('Error updating user');
               }
             setShowConfirmation(true)
            
-        }catch(error: any){
-            console.log(`Error updating user details: ${error.message}`)
+        }catch(error){
+            console.log(`Error updating user details:`+ error)
+          //  toast.error(`Error updating user details: ${error.message}`)
            // toast.error(`Error updating user details: ${error.message}`);
         }
         
@@ -85,8 +88,8 @@ const ChangeEmapilUsername = ({onClose}: {onClose: () => void}) => {
         setShowChangeProfilePicPopup(!showChangeProfilePicPopup);
     }
 
-    const handleClose = () => {
-        onClose();
+    const handleCloseClick = () => {
+        onCloseClick();
     }
     const handleCloseConfirmation = () => {
         onClose();
@@ -94,8 +97,8 @@ const ChangeEmapilUsername = ({onClose}: {onClose: () => void}) => {
 
   return (
     <>
-    {showChangePasswordPopup ? (<ChangePassword onClose={closeChangePassword} onConfirmClose={handleClose}  />) : 
-    showChangeProfilePicPopup ? (<ChangeProfilePic onClose={closeChangeProfilePic} onConfirmClose={handleClose}/>) :
+    {showChangePasswordPopup ? (<ChangePassword onClose={closeChangePassword} onConfirmClose={handleCloseConfirmation}  />) : 
+    showChangeProfilePicPopup ? (<ChangeProfilePic onClose={closeChangeProfilePic} onConfirmClose={handleCloseConfirmation}/>) :
     showConfirmation ? (<Conformation onClosee={handleCloseConfirmation}/>) :
     (
     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-900 bg-opacity-50">
@@ -124,12 +127,13 @@ const ChangeEmapilUsername = ({onClose}: {onClose: () => void}) => {
                     <a href="#" onClick={openChangeProfilePic} className="text-green-400">Change profile picture</a>
 
                     <div className=' flex justify-end'>
-                        <button className=' text-green-400 hover:bg-green-400 hover:text-white mr-2 rounded-2xl p-5' onClick={handleClose} >Cancel</button>
+                        <button className=' text-green-400 hover:bg-green-400 hover:text-white mr-2 rounded-2xl p-5' onClick={handleCloseClick} >Cancel</button>
                         <button className=' text-green-400 hover:bg-green-400 hover:text-white rounded-2xl p-5' type='submit'>Submit</button>
                     </div>
 
                 </form>
             </div>
+            <ToastContainer></ToastContainer>
         </div>
     )}
     

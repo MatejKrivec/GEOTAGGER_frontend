@@ -4,6 +4,7 @@ import MyLocation from '../Location/MyLocation';
 import AddLocation from '../Location/AddLocation';
 import EditLocation from '../Location/EditLocation';
 import BestGuessLocation from '../Location/BestGuessLocation';
+import { toast, ToastContainer } from 'react-toastify'; 
 
 
 
@@ -38,6 +39,7 @@ const Profile = ({profilePic}:{profilePic: string}) => {
   useEffect(() => {
     SetUserData();
     setBestGuessesData();
+   
   }, ); 
 
   const handleAddLocation = () => {
@@ -85,7 +87,7 @@ const Profile = ({profilePic}:{profilePic: string}) => {
       setGuesses(uniqueGuesses);
     } catch (error) {
       console.error('Error:', error);
-      //toast.error('An error occurred while fetching guesses.');
+     // toast.error('An error occurred while fetching guesses.');
     }
   };
 
@@ -125,9 +127,9 @@ const Profile = ({profilePic}:{profilePic: string}) => {
         setLocations(locationArray)
 
         
-    } catch (error: any) {
+    } catch (error) {
         console.error('Error fetching username:', error);
-       // toast.error(error.message);
+      //  toast.error(error.message +"sadasdasdasdad");
     }
 }; 
   
@@ -160,6 +162,9 @@ const Profile = ({profilePic}:{profilePic: string}) => {
                         <BestGuessLocation key={guess.id} guess={guess}></BestGuessLocation>
                     ))}
                 </div>
+                <div className=' flex flex-col items-center'>
+                    <button className=' mt-5 rounded-lg border border-green-400 text-green-400 w-[6rem] justify-self-center'>Load more</button>
+                </div>
             </div>
           )}
           <div className=' flex flex-col '>
@@ -172,19 +177,25 @@ const Profile = ({profilePic}:{profilePic: string}) => {
                 <button className=' mb-10 rounded-lg border border-green-400 text-white bg-green-400 w-[7rem]' onClick={handleAddLocation}>Add location</button>
               </div>
             ) : (
-              <div className=' flex flex-wrap gap-4'>
-                {locations.map((location) => (
-                  < MyLocation key={location.id} location={location} EditVisable={handleEditLocation} />
-                ))}
-                <div className='addBtnContainer  h-[10rem] w-[15rem]'>
-                  <button className='bg-gray-300 h-full w-full flex items-center justify-center text-8xl pb-4' onClick={handleAddLocation}>+</button>
+              <>
+                <div className=' flex flex-wrap gap-4'>
+                  {locations.map((location) => (
+                    < MyLocation key={location.id} location={location} EditVisable={handleEditLocation} />
+                  ))}
+                  <div className='addBtnContainer  h-[10rem] w-[15rem]'>
+                    <button className='bg-gray-300 h-full w-full flex items-center justify-center text-8xl pb-4' onClick={handleAddLocation}>+</button>
+                  </div>
                 </div>
-              </div>
+                <div className=' flex flex-col items-center'>
+                    <button className=' mt-5 rounded-lg border border-green-400 text-green-400 w-[6rem] justify-self-center'>Load more</button>
+                </div>
+              </>
             )}
             
           </div>
         </div>
       )}
+      <ToastContainer></ToastContainer>
     </div>
     
   )

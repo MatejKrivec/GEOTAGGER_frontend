@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 
+
 const Conformation = ({onClosee}: {onClosee: () => void}) => {
     
     useEffect(()=> {

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { toast, ToastContainer } from 'react-toastify'; 
 
 interface Guess {
     id: number;
@@ -30,8 +31,9 @@ const UserGuess = ({ guess, index }: { guess: Guess; index: number }) => {
                 }
                 const userDataJson = await userData.json();
                 setUser(userDataJson);
-            } catch (error) {
+            } catch (error: any) {
                 console.error('Error fetching user data:', error);
+                toast.error('Error fetching user data:', error);
             }
         }
 
@@ -49,9 +51,23 @@ const UserGuess = ({ guess, index }: { guess: Guess; index: number }) => {
       backgroundColor = 'bg-gray-600'; // Dark gray for positions 4-6
     } 
 
+    const userID = localStorage.getItem('UserId');
+    let background = ''; // Initialize background variable
+    let distancetextcolour = 'text-green-400';
+    let textcolour = '';
+
+    if (userID !== null) {
+      const userIdNumber = parseInt(userID, 10); // Convert to number
+      if (userIdNumber === guess.UserID) {
+        background = 'bg-green-300';
+        distancetextcolour = 'text-white';
+        textcolour = 'text-white';
+      }
+    }
+
 
   return (
-    <div className='flex  items-center justify-between mb-3'>
+    <div className={`flex  items-center  mb-3 ${background} p-1`}>
         <div className='flex  items-center '>
             <div className={`leaderboardPlaceTag flex justify-center items-center w-[2rem] h-[2rem] rounded-full mr-4 ${backgroundColor}`}>
                 <p className='text-white'>{index + 1}</p>
@@ -59,15 +75,16 @@ const UserGuess = ({ guess, index }: { guess: Guess; index: number }) => {
             <div className='userImage mr-4'>
                 <img src={user?.profilePic} alt="userImage" className='w-[3rem] h-[3rem] rounded-full'/>
             </div>
-            <div className='nameAndDate flex flex-col'>
-                <p>{user?.username}</p>
-                <p>{new Date(guess.date).toLocaleDateString()}</p>
+            <div className={`nameAndDate flex flex-col `}>
+                <p className={`${textcolour}`}>{user?.username}</p>
+                <p className={`${textcolour}`}>{new Date(guess.date).toLocaleDateString()}</p>
             </div>
         </div>
        
-        <div className='errorDistance '>
-            <p className=' text-green-400 text-xl'>{guess.distance}m</p>
+        <div className={`errorDistance ml-auto ${distancetextcolour}`}>
+            <p className='  text-xl'>{guess.distance}m</p>
         </div>
+        <ToastContainer></ToastContainer>
     </div>
   )
 }

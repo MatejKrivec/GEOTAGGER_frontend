@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { toast, ToastContainer } from 'react-toastify'; 
 
 interface Guess {
     id: number;
@@ -35,8 +36,9 @@ const BestGuessLocation = ({guess}: {guess: Guess}) => {
             }
             const locationDataJson = await locationData.json();
             setLocation(locationDataJson);
-        } catch (error) {
+        } catch (error: any) {
             console.error('Error fetching user data:', error);
+            //toast.error('Error fetching user data:', error)
         }
     }
   return (
@@ -48,6 +50,7 @@ const BestGuessLocation = ({guess}: {guess: Guess}) => {
           <span className="text-white text-2xl font-bold">{guess.distance}m</span>
         </div>
       </div>
+      <ToastContainer></ToastContainer>
     </div>
   )
 }

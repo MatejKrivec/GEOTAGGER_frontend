@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import UserGuess from './UserGuess';
 import GoogleMapComponent2 from './GoogleMapComponent2';
-import { toast, ToastContainer } from 'react-toastify'; // Import ToastContainer
+import { toast, ToastContainer } from 'react-toastify'; 
 import 'react-toastify/dist/ReactToastify.css'; 
 
 interface LocationInterface {
@@ -65,39 +65,41 @@ const Guess = ({ location, onClose}: { location: LocationInterface, onClose: () 
   const [guesses, setGuesses] = useState<Guess[]>([]);
 
   useEffect(() => {
-    const fetchGuesses = async () => {
-      try {
-        const response = await fetch(`http://localhost:3000/guesses/location/${location.id}`);
-        if (!response.ok) {
-          throw new Error('Error fetching guesses');
-        }
-        const data = await response.json();
-        
-        // Group guesses by UserID
-        const groupedGuesses: { [key: number]: Guess } = {};
-        data.forEach((guess: Guess) => {
-          if (!(guess.UserID in groupedGuesses) || guess.distance < groupedGuesses[guess.UserID].distance) {
-            groupedGuesses[guess.UserID] = guess;
-          }
-        });
-  
-        // Convert object back to array
-        const uniqueGuesses = Object.values(groupedGuesses);
-  
-        // Sort unique guesses by UserID
-        uniqueGuesses.sort((a: Guess, b: Guess) => a.distance - b.distance);
-  
-        setGuesses(uniqueGuesses);
-      } catch (error) {
-        console.error('Error:', error);
-        toast.error('An error occurred while fetching guesses.');
-      }
-    };
+    
   
     fetchGuesses();
 
     console.log(guesses)
   }, [location.id]);
+
+  const fetchGuesses = async () => {
+    try {
+      const response = await fetch(`http://localhost:3000/guesses/location/${location.id}`);
+      if (!response.ok) {
+        throw new Error('Error fetching guesses');
+      }
+      const data = await response.json();
+      
+      // Group guesses by UserID
+      const groupedGuesses: { [key: number]: Guess } = {};
+      data.forEach((guess: Guess) => {
+        if (!(guess.UserID in groupedGuesses) || guess.distance < groupedGuesses[guess.UserID].distance) {
+          groupedGuesses[guess.UserID] = guess;
+        }
+      });
+
+      // Convert object back to array
+      const uniqueGuesses = Object.values(groupedGuesses);
+
+      // Sort unique guesses by UserID
+      uniqueGuesses.sort((a: Guess, b: Guess) => a.distance - b.distance);
+
+      setGuesses(uniqueGuesses);
+    } catch (error) {
+      console.error('Error:', error);
+      toast.error('An error occurred while fetching guesses.');
+    }
+  };
 
 
   const handleLocationSelect = async (address: string, newLocation: any) => {
@@ -116,6 +118,7 @@ const Guess = ({ location, onClose}: { location: LocationInterface, onClose: () 
       setGuessedLocation(address);
     } else {
       console.error('Error geocoding addresses');
+      toast.error('Error geocoding addresses.');
       setErrorDistance('Error calculating distance');
     }
   };
@@ -217,6 +220,7 @@ const Guess = ({ location, onClose}: { location: LocationInterface, onClose: () 
       }
   
       console.log('User points updated successfully');
+      fetchGuesses();
   
     } catch (error) {
       console.error('Error:', error);

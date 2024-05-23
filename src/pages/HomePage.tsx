@@ -5,13 +5,14 @@ import Logout from './ProfileSettings/Logout';
 import Profile from './Home/Profile';
 import '../assets/styles/HomePage.css';
 import Cookies from 'js-cookie';
+import { toast, ToastContainer } from 'react-toastify';
 //import S3 from 'react-aws-s3-typescript'
 //import { S3 } from 'aws-sdk';
 
 const HomePage = () => {
   const [showSettingsPopup, setShowSettingsPopup] = useState(false);
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
-  const [activeTab, setActiveTab] = useState('profile');
+  const [activeTab, setActiveTab] = useState(localStorage.getItem('activeTab'));
   const [profilePic, setProfilePic] = useState('');
   const [points, setPoints] = useState(0);
   
@@ -22,6 +23,11 @@ const HomePage = () => {
       GetUserData(token);
     } else {
       console.error('Token not found');
+    }
+
+    const storedActiveTab = localStorage.getItem('activeTab');
+    if (storedActiveTab) {
+      setActiveTab(storedActiveTab);
     }
   },[] );
 
@@ -40,6 +46,7 @@ const HomePage = () => {
       });
       
       if (!response.ok) {
+        toast.error('Failed to decode token');
         throw new Error('Failed to decode token');
       }
       
@@ -53,6 +60,7 @@ const HomePage = () => {
       const user = await data.json()
       
       if (!data.ok) {
+        toast.error('Failed to decode token');
         throw new Error('Failed to decode token');
       }
 
@@ -61,17 +69,18 @@ const HomePage = () => {
       localStorage.setItem('UserId', userId);
 
       setPoints(user.points)
-      console.log("user points:"+ user.points)
+      //console.log("user points:"+ user.points)
 
     } catch (error) {
       console.log(error)
-      //toast.error((error as Error).message);
+     // toast.error((error as Error).message);
     }
   };
 
-    const handleTabChange = (tab: React.SetStateAction<string>) => {
-      setActiveTab(tab);
-    };
+  const handleTabChange = (tab: string) => {
+    setActiveTab(tab);
+    localStorage.setItem('activeTab', tab);
+  };
 
     const renderContent = () => {
         if (activeTab === 'homeLanding') {
@@ -96,6 +105,10 @@ const HomePage = () => {
   const closeSettingsPopup = () => {
     setShowSettingsPopup(!showSettingsPopup);
     location.reload()
+  };
+
+  const closeClickSettingsPopup = () => {
+    setShowSettingsPopup(!showSettingsPopup);
   };
   const closeLogoutPopup = () => {
     setShowLogoutPopup(!showLogoutPopup);
@@ -144,7 +157,7 @@ const HomePage = () => {
 
       {/* Render settings popup */}
       {showSettingsPopup && (
-          <ChangeEmailUsername onClose={closeSettingsPopup} />
+          <ChangeEmailUsername onClose={closeSettingsPopup} onCloseClick={closeClickSettingsPopup} />
       )}
       {showLogoutPopup && (
           <Logout onClose={closeLogoutPopup} />
@@ -156,6 +169,7 @@ const HomePage = () => {
           <p>All Rights Reserved | skillupmentor.com</p>
         </div>
       </footer>
+      <ToastContainer></ToastContainer>
     </div>
   );
 };

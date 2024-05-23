@@ -1,5 +1,6 @@
 import React, { useDebugValue, useEffect, useState } from 'react'
 import GoogleMapComponent from './GoogleMapComponent';
+import { toast, ToastContainer } from 'react-toastify'; 
 
 
 
@@ -13,16 +14,19 @@ const AddLocation = ({Close}: {Close: () => void}) => {
     const handleAddLocation = async() => {
         if(locationImage === "src/assets/images/placeholder-image 1.png") {
             console.log('image cant be default')
+            toast.error('you have to add an image')
             return
         }
         if(location === ''){
             console.log('location cant be empty')
+            toast.error('location cant be empty')
             return
         }
 
         try {
             if (!selectedFile) {
                 throw new Error('No file selected');
+                toast.error('No file selected')
               }
 
             const formData = new FormData();
@@ -83,7 +87,7 @@ const AddLocation = ({Close}: {Close: () => void}) => {
             }
         
             console.log('User points updated successfully');
-
+            toast.success('User points updated successfully')
             
         } catch (error) {
             
@@ -134,6 +138,7 @@ const AddLocation = ({Close}: {Close: () => void}) => {
                 <button className=' text-white bg-green-600 rounded-xl p-2 w-[6rem]' onClick={handleAddLocation}>Add new</button>
             </div>
         </div>
+        <ToastContainer></ToastContainer>
         
 
       

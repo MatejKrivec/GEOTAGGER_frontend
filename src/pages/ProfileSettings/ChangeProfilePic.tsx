@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Conformation from './Conformation';
+import { toast, ToastContainer } from 'react-toastify';
 
 const ChangeProfilePic = ({ onClose, onConfirmClose }: { onClose: () => void; onConfirmClose: () => void }) => {
   const [showConfirmation, setShowConfirmation] = useState(false);
@@ -47,6 +48,7 @@ const ChangeProfilePic = ({ onClose, onConfirmClose }: { onClose: () => void; on
       });
 
       if (!response.ok) {
+        toast.error('Failed to upload image');
         throw new Error('Failed to upload image');
       }
 
@@ -64,6 +66,7 @@ const ChangeProfilePic = ({ onClose, onConfirmClose }: { onClose: () => void; on
     });
 
     if (!patchResponse.ok) {
+      toast.error('Failed to update profile picture');
       throw new Error('Failed to update profile picture');
     }
 
@@ -71,6 +74,7 @@ const ChangeProfilePic = ({ onClose, onConfirmClose }: { onClose: () => void; on
 
       setShowConfirmation(!showConfirmation);
     } catch (error) {
+     // toast.error('Error uploading image:', error);
       console.error('Error uploading image:', error);
     }
   };
@@ -124,6 +128,7 @@ const ChangeProfilePic = ({ onClose, onConfirmClose }: { onClose: () => void; on
           </div>
         </div>
       )}
+      <ToastContainer></ToastContainer>
     </>
   );
 };

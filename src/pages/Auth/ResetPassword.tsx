@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
 
 const ResetPassword = () => {
   const [formData, setFormData] = useState({
@@ -30,7 +31,6 @@ const ResetPassword = () => {
       });
 
       if (!response.ok) {
-        console.log('Error validating');
         throw new Error('Error validating');
       }
 
@@ -42,6 +42,7 @@ const ResetPassword = () => {
 
       if (formData.newPassword !== formData.confirmNewPassword) {
         console.log('Passwords do not match');
+        toast.error('Passwords do not match');
         return;
       }
 
@@ -115,6 +116,7 @@ const ResetPassword = () => {
       <div className='w-[55%]'>
         <img src="src\assets\images\image 1.png" alt="mapImg" className="w-full h-full object-cover" />
       </div>
+      <ToastContainer />
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
 
 const SignUp = () => {
 
@@ -31,8 +32,7 @@ const SignUp = () => {
     e.preventDefault();
 
     if (formData.password !== formData.repeatPassword) {
-      console.error('Password and repeat password do not match');
-      // Optionally, you can display an error message to the user
+      toast.error('Password and repeat password do not match');
       return;
     }
 
@@ -58,7 +58,7 @@ const SignUp = () => {
     }
     catch (error) {
       console.error('Error creating user:', error);
-      //toast.error((error instanceof Error) ? error.message : 'Error creating user');
+      toast.error((error instanceof Error) ? error.message : 'Error creating user');
     }
   }
 
@@ -111,6 +111,7 @@ const SignUp = () => {
       <div className=' w-[55%]'>
             <img src="src\assets\images\image 1.png" alt="mapImg" className="w-full h-full object-cover" />
       </div>
+      <ToastContainer />
     </div>
   )
 }

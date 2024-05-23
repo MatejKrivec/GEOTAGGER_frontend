@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Conformation from './Conformation'
+import { toast, ToastContainer } from 'react-toastify';
 
 const ChangePassword = ({onClose, onConfirmClose}: {onClose: () => void; onConfirmClose: () => void;}) => {
 
@@ -31,12 +32,14 @@ const ChangePassword = ({onClose, onConfirmClose}: {onClose: () => void; onConfi
 
       if (!formData.newPassword && !formData.repeatNewPassword) {
           console.log('Please fill in all password fields.');
+          toast.error('Please fill in all password fields.');
           return; // Return early if any password is empty
       }
 
       if (formData.newPassword !== formData.repeatNewPassword) {
         //toast.error('Passwords do not match');
         console.log('Passwords do not match')
+        toast.error('Passwords do not match')
       }
       else{
         const userId = localStorage.getItem('UserId');
@@ -56,6 +59,7 @@ const ChangePassword = ({onClose, onConfirmClose}: {onClose: () => void; onConfi
         if (isPasswordValid === 'false') {
           //toast.error('Invalid current password');
           console.log('invalid current pasword!!!!')
+          toast.error('invalid current pasword!!!!')
           return;
         }
 
@@ -69,6 +73,7 @@ const ChangePassword = ({onClose, onConfirmClose}: {onClose: () => void; onConfi
         });
         if (!update.ok) {
           console.log('Error updating user')
+          toast.error('Error updating user')
           throw new Error('Error updating user');
         }
 
@@ -120,6 +125,7 @@ const ChangePassword = ({onClose, onConfirmClose}: {onClose: () => void; onConfi
             </div>
         </div>
       )}
+      <ToastContainer></ToastContainer>
     </>
   )
 }

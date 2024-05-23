@@ -1,5 +1,6 @@
 import React from 'react';
 import { PencilIcon, TrashIcon } from '@heroicons/react/16/solid';
+import { toast, ToastContainer } from 'react-toastify'; 
 
 
 interface Location {
@@ -48,10 +49,11 @@ const MyLocation = ({ EditVisable, location }: LocationProps) => {
         })
 
         if(!deleteLocation.ok){
+          toast.error('Failed to delete location.')
           throw new Error("Failed to delete location")
         }
 
-        window.location.reload();
+      //  window.location.reload();
 
       } catch (error) {
         console.log(error)
@@ -67,6 +69,7 @@ const MyLocation = ({ EditVisable, location }: LocationProps) => {
             <button className="bg-red-700 text-white py-2 px-4 rounded" onClick={handleDeleteLocation}> <TrashIcon className="h-5 w-5 " /> </button>
         </div>
       </div>
+      <ToastContainer></ToastContainer>
     </div>
   );
 }

@@ -3,6 +3,7 @@ import '../../assets/styles/AuthPages.css';
 import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify'; 
 
 
 
@@ -54,7 +55,7 @@ const SignIn = () => {
         
         } catch (error) {
           console.error('Error authenticating:', error);
-          //toast.error((error as Error).message);
+          toast.error((error as Error).message + " Error authenticating");
         }
       } else {
         // Handle the case where the token is null (optional)
@@ -118,6 +119,8 @@ const SignIn = () => {
         if (!response.ok) {
           throw new Error('Wrong username or password'); 
         }
+
+        localStorage.setItem('activeTab', 'homeLanding');
       
         const responseData = await response.json();
         navigate('/'+responseData.route); 
@@ -125,13 +128,13 @@ const SignIn = () => {
       } catch (error) {
         console.error('Error authenticating:', error);
 
-        //toast.error((error as Error).message);
+        toast.error((error as Error).message);
       }
 
     }
     catch (error) {
       console.error('Error logging in:', error);
-      //toast.error((error as Error).message);
+      toast.error((error as Error).message);
     }
   }
 
@@ -190,6 +193,7 @@ const SignIn = () => {
       <div className=' w-[55%]'>
             <img src="src\assets\images\image 1.png" alt="mapImg" className="w-full h-full object-cover" />
       </div>
+      <ToastContainer />
     </div>
   )
 }

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import emailjs from 'emailjs-com';
 import { useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+
 
 const ForgotPassword = () => {
     const [Email, setEmail] = useState('');
@@ -40,9 +42,11 @@ const ForgotPassword = () => {
               .then(
                   () => {
                       console.log('SUCCESS!');
+                      toast.success('Reset token sent successfully!');
                   },
                   (error) => {
                       console.log('FAILED...', error.text);
+                      toast.error('Failed to send email: ' + error.text);
                   },
               );
 
@@ -55,7 +59,7 @@ const ForgotPassword = () => {
 
           } catch (error) {
             console.error('Error sending reset token:', error);
-            // Handle error (e.g., display error message to the user)
+            toast.error((error instanceof Error) ? error.message : 'Error sending reset token');
           }
     };
     
@@ -90,6 +94,7 @@ const ForgotPassword = () => {
       <div className=' w-[55%]'>
             <img src="src\assets\images\image 1.png" alt="mapImg" className="w-full h-full object-cover" />
       </div>
+      <ToastContainer />
     </div>
   )
 }

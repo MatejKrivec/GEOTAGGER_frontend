@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import GoogleMapComponent from './GoogleMapComponent';
 import { useJsApiLoader, Libraries } from '@react-google-maps/api';
+import { toast, ToastContainer } from 'react-toastify'; 
 
 
 const libraries: Libraries = ['places'];
@@ -55,6 +56,7 @@ const EditLocation = ({ Close, LocationToEdit }: { Close: () => void; LocationTo
   const handleEditLocation = async () => {
     if (locationImage === locationImage2 && location === location2) {
       console.log('No changes to edit');
+      toast.error('No changes to edit');
       return;
     }
 
@@ -153,6 +155,7 @@ const EditLocation = ({ Close, LocationToEdit }: { Close: () => void; LocationTo
           </div>
         </div>
       </div>
+      <ToastContainer></ToastContainer>
     </div>
   );
 }

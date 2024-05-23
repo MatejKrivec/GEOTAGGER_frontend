@@ -3,6 +3,7 @@ import React, { useEffect, useState, useSyncExternalStore } from 'react'
 import Location from '../Location/Location'
 import Guess from '../Guess/Guess'
 import BestGuessLocation from '../Location/BestGuessLocation'
+import { toast, ToastContainer } from 'react-toastify'; 
 
 
 interface LocationInterface {
@@ -25,6 +26,7 @@ const Landing = () => {
   useEffect(() => {
     setLocationsData()
     setBestGuessesData();
+    localStorage.setItem('activeTab', 'homeLanding');
   },[])
 
   const setLocationsData = async() => {
@@ -79,8 +81,9 @@ const Landing = () => {
       uniqueGuesses.sort((a: Guess, b: Guess) => a.distance - b.distance);
   
       setGuesses(uniqueGuesses);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error:', error);
+      toast.error('Error:', error);
       //toast.error('An error occurred while fetching guesses.');
     }
   };
@@ -105,13 +108,13 @@ const Landing = () => {
             <h1 className='text-3xl mb-3 text-green-400'>Personal best guesses</h1>
             <p className=' mb-3'>Your personal best guesses appear here.
                 Go on and try to beat your personal records or set a new one!</p>
+                  <div className=' flex flex-wrap gap-4'>
+                      {guesses.map((guess) => (
+                          <BestGuessLocation key={guess.id} guess={guess}></BestGuessLocation>
+                      ))}
+                  </div>
             <div className=' flex flex-col items-center'>
-            <div className=' flex flex-wrap gap-4'>
-                    {guesses.map((guess) => (
-                        <BestGuessLocation key={guess.id} guess={guess}></BestGuessLocation>
-                    ))}
-                </div>
-                <button className=' mt-5 rounded-lg border border-green-400 text-green-400 w-[6rem]'>Load more</button>
+                  <button className=' mt-5 rounded-lg border border-green-400 text-green-400 w-[6rem] justify-self-center'>Load more</button>
             </div>
           </div>
           <div className=' flex flex-col '>
@@ -137,7 +140,7 @@ const Landing = () => {
           </div>
         </>
       )}
-      
+      <ToastContainer></ToastContainer>
     </div>
   )
 }
