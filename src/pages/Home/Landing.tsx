@@ -24,10 +24,11 @@ const Landing = () => {
   const [guesses, setGuesses] = useState<Guess[]>([]);
 
   useEffect(() => {
-    setLocationsData()
     setBestGuessesData();
+    setLocationsData()
     localStorage.setItem('activeTab', 'homeLanding');
-  },[])
+    //location.reload()
+  },)
 
   const setLocationsData = async() => {
     const userID = localStorage.getItem('UserId')
@@ -81,6 +82,8 @@ const Landing = () => {
       uniqueGuesses.sort((a: Guess, b: Guess) => a.distance - b.distance);
   
       setGuesses(uniqueGuesses);
+
+      //location.reload()
     } catch (error: any) {
       console.error('Error:', error);
       toast.error('Error:', error);

@@ -98,10 +98,25 @@ const SignIn = () => {
         throw new Error('Failed to log in');
       }
 
+      
+
       const now = new Date();
       const oneHourLater = new Date(now.getTime() + 60 * 60000);
 
       const { token } = await response.json();
+
+      const verifyResponse = await fetch('http://localhost:3000/auth/verify-token', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+      });
+
+      if (!verifyResponse.ok) {
+        throw new Error('Invalid token');
+      }
+
       Cookies.set('token', token, { 
         expires: oneHourLater, 
         secure: true, 
@@ -124,6 +139,7 @@ const SignIn = () => {
       
         const responseData = await response.json();
         navigate('/'+responseData.route); 
+       //navigate('/Admin'); 
       
       } catch (error) {
         console.error('Error authenticating:', error);

@@ -7,6 +7,10 @@ import HomePage from './pages/HomePage';
 import Cookies from 'js-cookie';
 import ForgotPassword from './pages/Auth/ForgotPassword';
 import ResetPassword from './pages/Auth/ResetPassword';
+import AdminHomePage from './pages/AdminHomePage';
+
+
+
 
 function App() {
 
@@ -19,10 +23,10 @@ function App() {
         <Route path="/ForgotPassword" element={<ForgotPassword />} />
         <Route path="/ResetPassword" element={<ResetPassword />} />
 
-        
-
         <Route element={<RouteGuard  />}>
           <Route path="/Home" element={<HomePage />} />
+          <Route path="/Admin" element={<AdminHomePage />} />
+
         </Route>
 
       </Routes>
@@ -38,7 +42,7 @@ function RouteGuard() {
     return <Navigate to="/Signin" />;
   }
 
-  return <>{<HomePage></HomePage>}</>;
+  return <>{<HomePage/>}</>;
 }
 
 export default App
