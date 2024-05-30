@@ -15,6 +15,7 @@ const HomePage = () => {
   const [profilePic, setProfilePic] = useState('');
   const [points, setPoints] = useState(0);
   const [userRole, setUserRole] = useState('');
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const token = Cookies.get('token');
@@ -154,16 +155,18 @@ const HomePage = () => {
 
   return (
     <>
-      {userRole === 'admin' ? (
-        <AdminHomePage/>
-      ):(
-<div className="flex flex-col min-h-screen relative">
+    {userRole === 'admin' ? (
+      <AdminHomePage />
+    ) : (
+      <div className="flex flex-col min-h-screen relative">
         <div className="main m-5">
           <div className="headerContainer flex justify-between items-center">
             <div className="logoContainer">
-              <img src="src\assets\images\geotagger_logo.PNG" alt="logo" />
+              <img src="src/assets/images/geotagger_logo.PNG" alt="logo" />
             </div>
-            <div className="SignIN-SignUP-container flex items-center">
+            <div className="SignIN-SignUP-container flex items-center md:justify-between justify-end">
+              {/* Menu items */}
+              <div className="hidden md:flex order-2 md:order-1">
               <button
                 className="HomeBTN hover:bg-green-400 hover:text-white text-black font-bold py-2 px-4 rounded mr-2"
                 onClick={() => handleTabChange('homeLanding')}
@@ -182,40 +185,73 @@ const HomePage = () => {
               >
                 Logout
               </button>
-
-              <div className=" border-2 border-green-400 flex items-center rounded-full mr-5">
-                <img onClick={() => handleTabChange('profile')}
-                  src={profilePic} alt="DefaultUserPic" className=" w-[4rem] h-[4rem] rounded-full cursor-pointer" />
-
-                <p className=" ml-5 mr-8">{points}</p>
+            </div>
+              {/* Profile div */}
+              <div className="border-2 border-green-400 flex items-center rounded-full mr-5 order-1 md:order-2">
+                <img
+                  onClick={() => handleTabChange('profile')}
+                  src={profilePic}
+                  alt="DefaultUserPic"
+                  className="w-16 h-16 rounded-full cursor-pointer"
+                />
+                <p className="ml-5 mr-8">{points}</p>
               </div>
-
-              <button className="text-[2rem] text-white bg-green-400 rounded-full w-[3.5rem] pb-2">+</button>
+              {/* Hamburger menu button */}
+              <button
+                  className="md:hidden text-black text-2xl order-3 md:order-3"
+                  onClick={() => setMenuOpen(!menuOpen)}
+                >
+                  ☰
+                </button>
+                {/* Menu items */}
+                <div className={`menu-items ${menuOpen ? 'flex' : 'hidden'} flex-col md:flex-row md:hidden order-2 md:order-1 `}>
+                  <button
+                    className="HomeBTN hover:bg-green-400 hover:text-white border text-black font-bold py-2 px-4 rounded-xl mr-2 m-1"
+                    onClick={() => handleTabChange('homeLanding')}
+                  >
+                    Home  <span>&rarr;</span>
+                  </button>
+                  <button
+                    className="SettingsBTN hover:bg-green-400 hover:text-white border text-black font-bold py-2 px-4 rounded-xl mr-2 m-1"
+                    onClick={showSettings}
+                  >
+                    Profile settings <span>&rarr;</span>
+                  </button>
+                  <button
+                    className="logoutBTN hover:bg-green-400 hover:text-white border  text-black font-bold py-2 px-4 rounded-xl mr-2 m-1"
+                    onClick={showLogout}
+                  >
+                    Logout <span>&rarr;</span>
+                  </button>
+                </div>
+              {/* Plus button */}
+              <button className="hidden md:block text-2xl text-white bg-green-400 rounded-full w-14 h-14 flex items-center justify-center order-4 md:order-4">+</button>
             </div>
           </div>
         </div>
-
+  
         {renderContent()}
-
-        {/* Render settings popup */}
+  
         {showSettingsPopup && (
           <ChangeEmailUsername onClose={closeSettingsPopup} onCloseClick={closeClickSettingsPopup} />
         )}
         {showLogoutPopup && (
           <Logout onClose={closeLogoutPopup} />
         )}
-
+  
         <footer className="bg-green-400 mt-auto">
           <div className="flex justify-between text-white container mx-auto py-4 px-4 max-w-full w-full">
             <h4>Geotagger</h4>
             <p>All Rights Reserved | skillupmentor.com</p>
           </div>
         </footer>
-        <ToastContainer></ToastContainer>
+        <ToastContainer />
       </div>
-      )} 
-      
-    </>
+    )}
+  </>
+  
+
+  
   );
 };
 

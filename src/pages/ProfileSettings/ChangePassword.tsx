@@ -96,37 +96,61 @@ const ChangePassword = ({onClose, onConfirmClose}: {onClose: () => void; onConfi
 
   return (
     <>
-      { showConfirmation ? (<Conformation onClosee={handleConformationClose}/> ): 
-      (
-        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-900 bg-opacity-50">
-            <div className="bg-white p-6 rounded-md w-[496px]">
-              <h1 className='text-3xl mb-3'>
-                  Profile <span className="text-green-400">settings</span>
-              </h1>
-                  <p className=' mb-3'>Change your password</p>
-                <form className='flex flex-col w-full max-w-md' onSubmit={handleSubmit}>
+  {showConfirmation ? (
+    <Conformation onClosee={handleConformationClose} />
+  ) : (
+    <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-900 bg-opacity-50">
+      <div className="bg-white p-6 md:p-8 rounded-md w-full max-w-sm md:max-w-md">
+        <h1 className="text-3xl md:text-4xl mb-4">
+          Profile <span className="text-green-400">settings</span>
+        </h1>
+        <p className="mb-4">Change your password</p>
+        <form className="flex flex-col w-full" onSubmit={handleSubmit}>
+          <label htmlFor="CurrentP">Current password</label>
+          <input
+            className="border rounded-lg px-3 py-2 mb-3 w-full"
+            name="currentPassword"
+            type="password"
+            onChange={handleChange}
+          />
 
-                  <label htmlFor="CurrentP">Current password</label>
-                  <input className='border rounded-lg px-2 py-1 mb-2 w-full ' name='currentPassword' type="password"  onChange={handleChange}/>
+          <label htmlFor="NewP">New password</label>
+          <input
+            className="border rounded-lg px-3 py-2 mb-3 w-full"
+            name="newPassword"
+            type="password"
+            onChange={handleChange}
+          />
 
-                  <label htmlFor="NewP">New password</label>
-                  <input className='border rounded-lg px-2 py-1 mb-2 w-full ' name='newPassword' type="password" onChange={handleChange}/>
+          <label htmlFor="RepeatNewP">Repeat new password</label>
+          <input
+            className="border rounded-lg px-3 py-2 mb-3 w-full"
+            name="repeatNewPassword"
+            type="password"
+            onChange={handleChange}
+          />
 
-                  <label htmlFor="RepeatNewP">Repeat new password</label>
-                  <input className='border rounded-lg px-2 py-1 mb-2 w-full ' name='repeatNewPassword' type="password" onChange={handleChange}/>
+          <div className="flex justify-end">
+            <button
+              className="text-green-400 hover:bg-green-400 hover:text-white mr-3 md:mr-4 rounded-lg px-4 py-2"
+              onClick={handleClose}
+            >
+              Cancel
+            </button>
+            <button
+              className="text-green-400 hover:bg-green-400 hover:text-white rounded-lg px-4 py-2"
+              type="submit"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  )}
+  <ToastContainer />
+</>
 
-
-                  <div className=' flex justify-end'>
-                      <button className=' text-green-400 hover:bg-green-400 hover:text-white mr-2 rounded-2xl p-5' onClick={handleClose}>Cancel</button>
-                      <button className=' text-green-400 hover:bg-green-400 hover:text-white rounded-2xl p-5' type='submit'>Submit</button>
-                  </div>
-
-                </form>
-            </div>
-        </div>
-      )}
-      <ToastContainer></ToastContainer>
-    </>
   )
 }
 

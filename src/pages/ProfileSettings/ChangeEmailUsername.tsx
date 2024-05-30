@@ -97,47 +97,81 @@ const ChangeEmapilUsername = ({onClose,onCloseClick}: {onClose: () => void,onClo
 
   return (
     <>
-    {showChangePasswordPopup ? (<ChangePassword onClose={closeChangePassword} onConfirmClose={handleCloseConfirmation}  />) : 
-    showChangeProfilePicPopup ? (<ChangeProfilePic onClose={closeChangeProfilePic} onConfirmClose={handleCloseConfirmation}/>) :
-    showConfirmation ? (<Conformation onClosee={handleCloseConfirmation}/>) :
-    (
-    <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-900 bg-opacity-50">
-            <div className="bg-white p-6 rounded-md">
-            <h1 className='text-3xl mb-3'>
-                Profile <span className="text-green-400">settings</span>
-            </h1>
-                <p className=' mb-3'>Change your information</p>
-                <form className='flex flex-col w-full max-w-md' onSubmit={handleSubmit}>
-
-                    <label htmlFor="Email">Email</label>
-                    <input className='border rounded-lg px-2 py-1 mb-2 w-full' name='email' type="email" value={userData.email} onChange={handleInputChange} />
-
-                    <div className=' flex justify-between'>
-                        <div className=' mr-2'>
-                            <label htmlFor="Firstname">First name</label>
-                            <input className='border rounded-lg px-2 py-1 mb-2 w-full' name="firstName" type="text" value={userData.firstName} onChange={handleInputChange}/>
-                        </div>
-                        <div className=' ml-2'>
-                            <label htmlFor="Lastname">Last name</label>
-                            <input className='border rounded-lg px-2 py-1 mb-2 w-full' name='lastName' type="text" value={userData.lastName} onChange={handleInputChange}/>
-                        </div>
-                    </div>
-
-                    <a href="#" onClick={openChangePassword} className="text-green-400 mb-2">Change password</a>
-                    <a href="#" onClick={openChangeProfilePic} className="text-green-400">Change profile picture</a>
-
-                    <div className=' flex justify-end'>
-                        <button className=' text-green-400 hover:bg-green-400 hover:text-white mr-2 rounded-2xl p-5' onClick={handleCloseClick} >Cancel</button>
-                        <button className=' text-green-400 hover:bg-green-400 hover:text-white rounded-2xl p-5' type='submit'>Submit</button>
-                    </div>
-
-                </form>
+    {showChangePasswordPopup ? (
+      <ChangePassword onClose={closeChangePassword} onConfirmClose={handleCloseConfirmation} />
+    ) : showChangeProfilePicPopup ? (
+      <ChangeProfilePic onClose={closeChangeProfilePic} onConfirmClose={handleCloseConfirmation} />
+    ) : showConfirmation ? (
+      <Conformation onClosee={handleCloseConfirmation} />
+    ) : (
+      <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-900 bg-opacity-50">
+        <div className="bg-white p-4 md:p-6 rounded-md w-full max-w-sm md:max-w-md">
+          <h1 className="text-2xl md:text-3xl mb-3">
+            Profile <span className="text-green-400">settings</span>
+          </h1>
+          <p className="mb-3">Change your information</p>
+          <form className="flex flex-col w-full" onSubmit={handleSubmit}>
+            <label htmlFor="Email">Email</label>
+            <input
+              className="border rounded-lg px-3 py-2 mb-3 w-full"
+              name="email"
+              type="email"
+              value={userData.email}
+              onChange={handleInputChange}
+            />
+  
+            <div className="flex flex-col md:flex-row justify-between">
+              <div className="mb-3 md:mr-3">
+                <label htmlFor="Firstname">First name</label>
+                <input
+                  className="border rounded-lg px-3 py-2 mb-3 w-full"
+                  name="firstName"
+                  type="text"
+                  value={userData.firstName}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="mb-3 md:ml-3">
+                <label htmlFor="Lastname">Last name</label>
+                <input
+                  className="border rounded-lg px-3 py-2 mb-3 w-full"
+                  name="lastName"
+                  type="text"
+                  value={userData.lastName}
+                  onChange={handleInputChange}
+                />
+              </div>
             </div>
-            <ToastContainer></ToastContainer>
+  
+            <a href="#" onClick={openChangePassword} className="text-green-400 mb-3 md:mb-4">
+              Change password
+            </a>
+            <a href="#" onClick={openChangeProfilePic} className="text-green-400 mb-4">
+              Change profile picture
+            </a>
+  
+            <div className="flex justify-end">
+              <button
+                className="text-green-400 hover:bg-green-400 hover:text-white mr-3 rounded-2xl px-4 py-2"
+                onClick={handleCloseClick}
+              >
+                Cancel
+              </button>
+              <button
+                className="text-green-400 hover:bg-green-400 hover:text-white rounded-2xl px-4 py-2"
+                type="submit"
+              >
+                Submit
+              </button>
+            </div>
+          </form>
         </div>
+        <ToastContainer />
+      </div>
     )}
-    
-    </>
+  </>
+  
+  
     
   )
 }

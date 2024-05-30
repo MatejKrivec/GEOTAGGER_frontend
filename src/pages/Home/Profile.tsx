@@ -135,68 +135,67 @@ const Profile = ({profilePic}:{profilePic: string}) => {
   
   return (
     <div>
-      {addLocation ? (
-        <AddLocation Close={closeAddLocation}></AddLocation>
-      ) : editLocation ? (
-        <EditLocation Close={closeEditLocation} LocationToEdit={selectedLocation}></EditLocation>
+  {addLocation ? (
+    <AddLocation Close={closeAddLocation}></AddLocation>
+  ) : editLocation ? (
+    <EditLocation Close={closeEditLocation} LocationToEdit={selectedLocation}></EditLocation>
+  ) : (
+    <div className='overflow-y-auto m-5'>
+      <div className='mb-[3.5rem] flex items-center justify-center md:justify-start'>
+        <img src={profilePic} alt="DefaultUserPic" className="w-[4rem] h-[4rem] rounded-full" />
+        <h1 className='username text-5xl ml-5 text text-green-400'>{ime}</h1>
+      </div>
+      {guesses.length === 0 ? (
+        <div className='flex flex-col'>
+          <h1 className='text-2xl mb-3'>My best guesses</h1>
+          <p className='text-lg font-bold'>No best guesses yet!!</p>
+          <p className='mb-3'>Start new game and guess the location
+            of the picture to get the results here!</p>
+          <button className='mb-10 rounded-lg border border-green-400 text-white bg-green-400 w-[8.5rem] mt-3'>Go to locations</button>
+        </div>
       ) : (
-        <div className='overflow-y-auto m-5'>
-          <div className=' mb-[3.5rem] flex  items-center'>
-            <img src={profilePic} alt="DefaultUserPic" className=" w-[4rem] h-[4rem] rounded-full " />
-            <h1 className='username text-5xl ml-5 text text-green-400'>{ime}</h1>
+        <div>
+          <h1 className='text-2xl mb-3'>My best guesses</h1>
+          <div className='flex flex-wrap gap-4 justify-center md:justify-start'>
+            {guesses.map((guess) => (
+              <BestGuessLocation key={guess.id} guess={guess}></BestGuessLocation>
+            ))}
           </div>
-          {guesses.length === 0 ? (
-            <div className=' flex flex-col'>
-              <h1 className='text-2xl mb-3'>My best guesses</h1>
-              <p className=' text-lg font-bold'>No best guesses yet!!</p>
-              <p className=' mb-3'>Start new game and guess the location
-                of the picture to get the results here!</p>
-
-              <button className=' mb-10 rounded-lg border border-green-400 text-white bg-green-400 w-[8.5rem] mt-3'>Go to locations</button>
-            </div>
-          ) : (
-            <div>
-                <h1 className='text-2xl mb-3'>My best guesses</h1>
-                <div className=' flex flex-wrap gap-4'>
-                    {guesses.map((guess) => (
-                        <BestGuessLocation key={guess.id} guess={guess}></BestGuessLocation>
-                    ))}
-                </div>
-                <div className=' flex flex-col items-center'>
-                    <button className=' mt-5 rounded-lg border border-green-400 text-green-400 w-[6rem] justify-self-center'>Load more</button>
-                </div>
-            </div>
-          )}
-          <div className=' flex flex-col '>
-            <h1 className='text-2xl mb-3'>My uploads</h1>
-            {locations.length === 0 ? (
-              <div>
-                <p className=' text-lg font-bold'>No uploads yet!</p>
-                <p className=' mb-3 '>Upload new location with the click
-                  on button bellow or in navigation bar press the “+” button.</p>
-                <button className=' mb-10 rounded-lg border border-green-400 text-white bg-green-400 w-[7rem]' onClick={handleAddLocation}>Add location</button>
-              </div>
-            ) : (
-              <>
-                <div className=' flex flex-wrap gap-4'>
-                  {locations.map((location) => (
-                    < MyLocation key={location.id} location={location} EditVisable={handleEditLocation} />
-                  ))}
-                  <div className='addBtnContainer  h-[10rem] w-[15rem]'>
-                    <button className='bg-gray-300 h-full w-full flex items-center justify-center text-8xl pb-4' onClick={handleAddLocation}>+</button>
-                  </div>
-                </div>
-                <div className=' flex flex-col items-center'>
-                    <button className=' mt-5 rounded-lg border border-green-400 text-green-400 w-[6rem] justify-self-center'>Load more</button>
-                </div>
-              </>
-            )}
-            
+          <div className='flex justify-center md:justify-start'>
+            <button className='mt-5 rounded-lg border border-green-400 text-green-400 w-[6rem]'>Load more</button>
           </div>
         </div>
       )}
-      <ToastContainer></ToastContainer>
+      <div className='flex flex-col'>
+        <h1 className='text-2xl mb-3'>My uploads</h1>
+        {locations.length === 0 ? (
+          <div>
+            <p className='text-lg font-bold'>No uploads yet!</p>
+            <p className='mb-3'>Upload new location with the click
+              on button below or in navigation bar press the “+” button.</p>
+            <button className='mb-10 rounded-lg border border-green-400 text-white bg-green-400 w-[7rem]' onClick={handleAddLocation}>Add location</button>
+          </div>
+        ) : (
+          <>
+            <div className='flex flex-wrap gap-4 justify-center md:justify-start'>
+              {locations.map((location) => (
+                < MyLocation key={location.id} location={location} EditVisable={handleEditLocation} />
+              ))}
+              <div className='addBtnContainer h-[10rem] w-[15rem]'>
+                <button className='bg-gray-300 h-full w-full flex items-center justify-center text-8xl pb-4' onClick={handleAddLocation}>+</button>
+              </div>
+            </div>
+            <div className='flex justify-center md:justify-start'>
+              <button className='mt-5 rounded-lg border border-green-400 text-green-400 w-[6rem]'>Load more</button>
+            </div>
+          </>
+        )}
+      </div>
     </div>
+  )}
+  <ToastContainer></ToastContainer>
+</div>
+
     
   )
 }

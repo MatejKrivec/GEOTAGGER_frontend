@@ -99,37 +99,37 @@ const ChangeProfilePic = ({ onClose, onConfirmClose }: { onClose: () => void; on
 
   return (
     <>
-      {showConfirmation ? (
-        <Conformation onClosee={handleConformationClose} />
-      ) : (
-        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-900 bg-opacity-50">
-          <div className="bg-white p-6 rounded-md w-[496px]">
-            <h1 className="text-3xl mb-3">
-              Profile <span className="text-green-400">settings</span>
-            </h1>
-            <p className="mb-3">Change your profile photo</p>
-            <form className="flex flex-col w-full max-w-md" onSubmit={handleSubmit}>
-              <div className="flex flex-col justify-center items-center mb-5">
-                <img className="rounded-full h-[5rem] w-[5rem] mb-2 " src={profilePic} alt="" />
-                <label htmlFor="profile-pic-input" className="border text-green-400 rounded-lg p-2 w-[12rem] cursor-pointer text-center">
-                  Change profile photo
-                  <input id="profile-pic-input" type="file" accept="image/*" className="hidden" onChange={handleFileChange} />
-                </label>
-              </div>
-              <div className="flex justify-end">
-                <button className="text-green-400 hover:bg-green-400 hover:text-white mr-2 rounded-2xl p-5" onClick={handleClose}>
-                  Cancel
-                </button>
-                <button className="text-green-400 hover:bg-green-400 hover:text-white rounded-2xl p-5" type='submit'>
-                  Submit
-                </button>
-              </div>
-            </form>
-          </div>
+    {showConfirmation ? (
+      <Conformation onClosee={handleConformationClose} />
+    ) : (
+      <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-900 bg-opacity-50">
+        <div className="bg-white p-4 md:p-6 rounded-md w-full max-w-[496px]">
+          <h1 className="text-2xl md:text-3xl mb-3">
+            Profile <span className="text-green-400">settings</span>
+          </h1>
+          <p className="text-sm md:text-base mb-3">Change your profile photo</p>
+          <form className="flex flex-col w-full" onSubmit={handleSubmit}>
+            <div className="flex flex-col justify-center items-center mb-5">
+              <img className="rounded-full h-[5rem] w-[5rem] mb-2 md:mb-3" src={profilePic} alt="" />
+              <label htmlFor="profile-pic-input" className="border text-green-400 rounded-lg p-2 w-[12rem] cursor-pointer text-center">
+                Change profile photo
+                <input id="profile-pic-input" type="file" accept="image/*" className="hidden" onChange={handleFileChange} />
+              </label>
+            </div>
+            <div className="flex justify-end">
+              <button className="text-green-400 hover:bg-green-400 hover:text-white mr-2 rounded-2xl p-4 md:p-5" onClick={handleClose}>
+                Cancel
+              </button>
+              <button className="text-green-400 hover:bg-green-400 hover:text-white rounded-2xl p-4 md:p-5" type='submit'>
+                Submit
+              </button>
+            </div>
+          </form>
         </div>
-      )}
-      <ToastContainer></ToastContainer>
-    </>
+      </div>
+    )}
+    <ToastContainer></ToastContainer>
+  </>
   );
 };
 

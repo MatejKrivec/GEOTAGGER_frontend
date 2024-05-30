@@ -86,7 +86,7 @@ const Landing = () => {
       //location.reload()
     } catch (error: any) {
       console.error('Error:', error);
-      toast.error('Error:', error);
+     // toast.error('Error:', error);
       //toast.error('An error occurred while fetching guesses.');
     }
   };
@@ -103,48 +103,46 @@ const Landing = () => {
 
   return (
     <div className='overflow-y-auto m-5'>
-      {guessing && selectedLocation ? (
-        <Guess location={selectedLocation} onClose={handleGuesClose}></Guess>
-      ):(
-        <>
-          <div className=' flex flex-col'>
-            <h1 className='text-3xl mb-3 text-green-400'>Personal best guesses</h1>
-            <p className=' mb-3'>Your personal best guesses appear here.
-                Go on and try to beat your personal records or set a new one!</p>
-                  <div className=' flex flex-wrap gap-4'>
-                      {guesses.map((guess) => (
-                          <BestGuessLocation key={guess.id} guess={guess}></BestGuessLocation>
-                      ))}
-                  </div>
-            <div className=' flex flex-col items-center'>
-                  <button className=' mt-5 rounded-lg border border-green-400 text-green-400 w-[6rem] justify-self-center'>Load more</button>
-            </div>
+  {guessing && selectedLocation ? (
+    <Guess location={selectedLocation} onClose={handleGuesClose}></Guess>
+  ) : (
+    <>
+      <div className='flex flex-col'>
+        <h1 className='text-3xl mb-3 text-green-400'>Personal best guesses</h1>
+        <p className='mb-3'>Your personal best guesses appear here. Go on and try to beat your personal records or set a new one!</p>
+        <div className='flex flex-wrap gap-4 justify-center md:justify-start'>
+          {guesses.map((guess) => (
+            <BestGuessLocation key={guess.id} guess={guess}></BestGuessLocation>
+          ))}
+        </div>
+        <div className='flex justify-center md:justify-start'>
+          <button className='mt-5 rounded-lg border border-green-400 text-green-400 w-[6rem]'>Load more</button>
+        </div>
+      </div>
+      <div className='flex flex-col'>
+        <h1 className='text-3xl mb-3 text-green-400'>New locations</h1>
+        <p className='mb-3'>New uploads from users. Try to guess all the locations by pressing on a picture.</p>
+        {locations.length === 0 ? (
+          <div className='flex flex-col items-center justify-center'>
+            uploads list...
+            <button className='mt-5 rounded-lg border border-green-400 text-green-400 w-[6rem]'>Load more</button>
           </div>
-          <div className=' flex flex-col '>
-            <h1 className='text-3xl mb-3  text-green-400'>New locations</h1>
-            <p className=' mb-3'>New uploads from users.
-                Try to guess all the locations by pressing on a picture.</p>
-                {locations.length === 0 ? (
-                  <div className=' flex flex-col items-center justify-center'>
-                        uploads list...
-                        <button className=' mt-5 rounded-lg  border border-green-400 text-green-400 w-[6rem]'>Load more</button>
-                  </div>
-                ) : (
-                  
-                    <div className=' flex flex-wrap gap-4'>
-                          {locations.map((location) => (
-                          <Location key={location.id} location={location} onClick={() => handleLocationClick(location)}></Location>
-                        )) }
-                    </div>
-                )}
-                <div className=' flex flex-col items-center justify-center'>
-                        <button className=' mt-5 rounded-lg  border border-green-400 text-green-400 w-[6rem]'>Load more</button>
-                  </div>
+        ) : (
+          <div className='flex flex-wrap gap-4 justify-center md:justify-start'>
+            {locations.map((location) => (
+              <Location key={location.id} location={location} onClick={() => handleLocationClick(location)}></Location>
+            ))}
           </div>
-        </>
-      )}
-      <ToastContainer></ToastContainer>
-    </div>
+        )}
+        <div className='flex items-center justify-center'>
+          <button className='mt-5 rounded-lg border border-green-400 text-green-400 w-[6rem]'>Load more</button>
+        </div>
+      </div>
+    </>
+  )}
+  <ToastContainer></ToastContainer>
+</div>
+
   )
 }
 

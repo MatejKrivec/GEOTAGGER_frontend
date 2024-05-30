@@ -168,49 +168,44 @@ const SignIn = () => {
 
   return (
 
-    <div className=' flex w-full'>
-      <div className=' w-[45%] mt-10'>
-        
-        <div className='flex flex-col justify-center items-center mb-5'>
-            <img src="src\assets\images\geotagger_logo.PNG" alt="logo" className="w-32 h-auto mr-[21rem] mb-20" />
-            <h1 className='text-4xl mb-2'>Sign in</h1>
-            <p className='text-center'>Welcome back to Geotagger. We are glad that you are back.</p>
-        </div>
-        <div className='flex flex-col justify-center items-center'>
-            
-          <form className='flex flex-col w-full max-w-md' onSubmit={HandleSubmit}>
-
-              <label htmlFor="Email">Email</label>
-              <input className='border rounded-lg px-2 py-1 mb-2 w-full ' name='email' type="email"  onChange={handleChange} />
-
-              <label htmlFor="password">Password</label>
-              <input className='border rounded-lg px-2 py-1 mb-1  w-full' name='password' type="password" onChange={handleChange} />
-
-              <Link className='SignUpToLoginLink text-green-400 self-end mb-3 hover:text-blue-400' to="/ForgotPassword">Forgot password</Link>
-
-              <button className='bg-green-400 text-white font-bold py-2 px-4 mb-2 w-full rounded-xl ' type='submit'>Sign in</button>
-          </form>
-          <div className='flex flex-col w-full max-w-md'>
-            <button className='border text-black font-bold py-2 px-4 mb-2 w-full rounded-xl flex justify-center items-center' onClick={handleGoogleLogin}>
-                    <img src="src\assets\images\google-logo.jpg" alt="googleLogo" className=' w-8 bg-transparent mr-2'/>
-                    Sign in with Google</button>
-              <button className='bg-blue-400 text-white font-bold py-2 px-4 mb-2 w-full rounded-xl flex justify-center items-center'>
-                  <img src="src\assets\images\fb_logo.png" alt="" className='  w-8 mr-2' />
-                  Sign in with Facebook</button>
-
-              <div className="flex justify-between">
-              <p>Do you want to create an account?</p>
-              <Link className='SignUpToLoginLink text-green-400 hover:text-blue-400' to="/Signup">Sign up</Link>
-              </div>
-          </div>
-        </div>
-      </div>
-
-      <div className=' w-[55%]'>
-            <img src="src\assets\images\image 1.png" alt="mapImg" className="w-full h-full object-cover" />
-      </div>
-      <ToastContainer />
+    <div className='flex flex-col md:flex-row w-full'>
+  <div className='w-full md:w-[45%] mt-10 px-4'>
+    <div className='flex flex-col justify-center items-center mb-5'>
+      <img src="src/assets/images/geotagger_logo.PNG" alt="logo" className="w-32 h-auto mr-[21rem] mb-20" />
+      <h1 className='text-4xl mb-2'>Sign in</h1>
+      <p className='text-center'>Welcome back to Geotagger. We are glad that you are back.</p>
     </div>
+    <div className='flex flex-col justify-center items-center'>
+      <form className='flex flex-col w-full max-w-md' onSubmit={HandleSubmit}>
+        <label htmlFor="Email">Email</label>
+        <input className='border rounded-lg px-2 py-1 mb-2 w-full' name='email' type="email" onChange={handleChange} />
+        <label htmlFor="password">Password</label>
+        <input className='border rounded-lg px-2 py-1 mb-1 w-full' name='password' type="password" onChange={handleChange} />
+        <Link className='SignUpToLoginLink text-green-400 self-end mb-3 hover:text-blue-400' to="/ForgotPassword">Forgot password</Link>
+        <button className='bg-green-400 text-white font-bold py-2 px-4 mb-2 w-full rounded-xl' type='submit'>Sign in</button>
+      </form>
+      <div className='flex flex-col w-full max-w-md'>
+        <button className='border text-black font-bold py-2 px-4 mb-2 w-full rounded-xl flex justify-center items-center' onClick={handleGoogleLogin}>
+          <img src="src/assets/images/google-logo.jpg" alt="googleLogo" className='w-8 bg-transparent mr-2' />
+          Sign in with Google
+        </button>
+        <button className='bg-blue-400 text-white font-bold py-2 px-4 mb-2 w-full rounded-xl flex justify-center items-center'>
+          <img src="src/assets/images/fb_logo.png" alt="fbLogo" className='w-8 mr-2' />
+          Sign in with Facebook
+        </button>
+        <div className="flex justify-between">
+          <p>Do you want to create an account?</p>
+          <Link className='SignUpToLoginLink text-green-400 hover:text-blue-400' to="/Signup">Sign up</Link>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div className='hidden md:block w-full md:w-[55%]'>
+    <img src="src/assets/images/image 1.png" alt="mapImg" className="w-full h-full object-cover" />
+  </div>
+  <ToastContainer />
+</div>
+
   )
 }
 

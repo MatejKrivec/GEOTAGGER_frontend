@@ -33,7 +33,7 @@ const UserGuess = ({ guess, index }: { guess: Guess; index: number }) => {
                 setUser(userDataJson);
             } catch (error: any) {
                 console.error('Error fetching user data:', error);
-                toast.error('Error fetching user data:', error);
+               // toast.error('Error fetching user data:', error);
             }
         }
 

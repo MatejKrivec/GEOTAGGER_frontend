@@ -234,64 +234,64 @@ const Guess = ({ location, onClose}: { location: LocationInterface, onClose: () 
 
   return (
     <>
-    <div className=' w-full'>
-        <button className='bg-green-400 text-white hover:border-blue-400 rounded-xl p-1 w-full' onClick={handleBackClick}>Back</button>
+    <div className='w-full'>
+      <button className='bg-green-400 text-white hover:border-blue-400 rounded-xl p-1 w-full' onClick={handleBackClick}>Back</button>
     </div>
-        <div className='flex gap-4'>
-        <div className='guess flex flex-col w-[65%]'>
-            <div className='text-3xl mb-4'>
-            <h1>
-                Take a <span className='text-green-400'>guess</span>!
-            </h1>
-            </div>
-
-            <div className='image bg-slate-300 h-[20rem] mb-4'>
-            <img className='object-cover w-full h-full' src={location.photo} alt='LocationPicture' />
-            </div>
-            <div className='mapComponent bg-slate-300 h-[15rem] mb-4'>
-            <GoogleMapComponent2 onLocationSelect={handleLocationSelect}></GoogleMapComponent2>
-            </div>
-            <div className='guessInput flex justify-between mb-2'>
-            <div className='flex flex-col w-[75%]'>
-                <label htmlFor='guessedLocation'>Guessed location</label>
-                <input
-                className='border rounded-lg'
-                type='text'
-                name='guessedLocation'
-                value={guessedLocation}
-                onChange={(e) => setGuessedLocation(e.target.value)}
-                />
-            </div>
-            <div className='flex flex-col w-[22.5%]'>
-                <label htmlFor='errorDistance'>Error distance</label>
-                <input className='border rounded-lg' type='text' name='errorDistance'  readOnly />
-            </div>
-            </div>
-            <div className='btnContainer self-end'>
-            <button
-                className='bg-green-400 text-white hover:border-blue-400 rounded-xl p-1 w-[4.5rem]'
-                onClick={handleGuessClick}
-            >
-                Guess
-            </button>
-            <ToastContainer />
-            </div>
+    <div className='flex flex-col md:flex-row gap-4'>
+      <div className='guess flex flex-col w-full md:w-[65%]'>
+        <div className='text-3xl mb-4'>
+          <h1>
+            Take a <span className='text-green-400'>guess</span>!
+          </h1>
         </div>
-
-        <div className='leaderboard flex flex-col w-[35%]'>
-            <div className='text-3xl mb-4'>
-            <h1>Leaderboard</h1>
-            </div>
-
-            <div className='flex flex-col'> 
-              {guesses.map((guess, index) => (
-                <UserGuess key={guess.id} guess={guess} index={index}></UserGuess>
-              ))}
-
-            </div>
+        <div className='image bg-slate-300 h-[20rem] mb-4'>
+          <img className='object-cover w-full h-full' src={location.photo} alt='LocationPicture' />
         </div>
+        <div className='mapComponent bg-slate-300 h-[15rem] mb-4'>
+          <GoogleMapComponent2 onLocationSelect={handleLocationSelect}></GoogleMapComponent2>
         </div>
-    </>
+        <div className='guessInput flex justify-between mb-2'>
+          <div className='flex flex-col w-[75%]'>
+            <label htmlFor='guessedLocation'>Guessed location</label>
+            <input
+              className='border rounded-lg'
+              type='text'
+              name='guessedLocation'
+              value={guessedLocation}
+              onChange={(e) => setGuessedLocation(e.target.value)}
+            />
+          </div>
+          <div className='flex flex-col w-[22.5%]'>
+            <label htmlFor='errorDistance'>Error distance</label>
+            <input className='border rounded-lg' type='text' name='errorDistance'  readOnly />
+          </div>
+        </div>
+        <div className='btnContainer self-end'>
+          <button
+            className='bg-green-400 text-white hover:border-blue-400 rounded-xl p-1 w-[4.5rem]'
+            onClick={handleGuessClick}
+          >
+            Guess
+          </button>
+          <ToastContainer />
+        </div>
+      </div>
+  
+      {/* Leaderboard Section */}
+      <div className='leaderboard flex flex-col w-full md:w-[35%]'>
+        <div className='text-3xl mb-4'>
+          <h1>Leaderboard</h1>
+        </div>
+        <div className='flex flex-col'> 
+          {guesses.map((guess, index) => (
+            <UserGuess key={guess.id} guess={guess} index={index}></UserGuess>
+          ))}
+        </div>
+      </div>
+      {/* End Leaderboard Section */}
+    </div>
+  </>
+  
     
   );
 };
