@@ -3,6 +3,10 @@ import UserGuess from './UserGuess';
 import GoogleMapComponent2 from './GoogleMapComponent2';
 import { toast, ToastContainer } from 'react-toastify'; 
 import 'react-toastify/dist/ReactToastify.css'; 
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState, AppDispatch } from '../../app/store';
+import { updateUserPoints, fetchUserPoints } from '../../features/userSlice';
+
 
 interface LocationInterface {
   id: number;
@@ -59,10 +63,16 @@ const calculateCrowDistance = (lat1: number, lon1: number, lat2: number, lon2: n
   return R * c * 1000; // Convert to meters
 };
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 const Guess = ({ location, onClose}: { location: LocationInterface, onClose: () => void }) => {
   const [errorDistance, setErrorDistance] = useState('');
   const [guessedLocation, setGuessedLocation] = useState('');
   const [guesses, setGuesses] = useState<Guess[]>([]);
+  const dispatch = useDispatch<AppDispatch>();
+  //const { points, status } = useSelector((state: RootState) => state.user);
+  
 
   useEffect(() => {
     
@@ -198,28 +208,17 @@ const Guess = ({ location, onClose}: { location: LocationInterface, onClose: () 
       const guessCount = await countResponse.json();
       console.log(`Number of guesses: ${guessCount}`);
   
-      let points = 0;
+      let pointsAwarded = 0;
       if (guessCount === 1) {
-        points = 1;
+        pointsAwarded = 1;
       } else if (guessCount === 2) {
-        points = 2;
+        pointsAwarded = 2;
       } else if (guessCount >= 3) {
-        points = 3;
+        pointsAwarded = 3;
       }
   
-      const updateResponse = await fetch(`http://localhost:3000/users/updateUserPoints/${userID}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ points })
-      });
-  
-      if (!updateResponse.ok) {
-        throw new Error('Error updating user points');
-      }
-  
-      console.log('User points updated successfully');
+      // Dispatch the updateUserPoints action to update the points in the store
+      dispatch(updateUserPoints({ userId: userID, points: pointsAwarded }));
       fetchGuesses();
   
     } catch (error) {
@@ -297,3 +296,7 @@ const Guess = ({ location, onClose}: { location: LocationInterface, onClose: () 
 };
 
 export default Guess;
+function dispatch(arg0: unknown) {
+  throw new Error('Function not implemented.');
+}
+

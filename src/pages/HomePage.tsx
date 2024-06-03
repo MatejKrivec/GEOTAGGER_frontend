@@ -7,15 +7,24 @@ import AdminHomePage from './AdminHomePage'; // Import AdminHomePage component
 import '../assets/styles/HomePage.css';
 import Cookies from 'js-cookie';
 import { toast, ToastContainer } from 'react-toastify';
+import { AppDispatch, RootState } from '../app/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchUserPoints } from '../features/userSlice';
 
 const HomePage = () => {
   const [showSettingsPopup, setShowSettingsPopup] = useState(false);
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
   const [activeTab, setActiveTab] = useState(localStorage.getItem('activeTab'));
   const [profilePic, setProfilePic] = useState('');
-  const [points, setPoints] = useState(0);
   const [userRole, setUserRole] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const dispatch = useDispatch<AppDispatch>();
+  
+  const points = useSelector((state: RootState) => state.user.points);
+
+  
+
 
   useEffect(() => {
     const token = Cookies.get('token');
@@ -29,7 +38,8 @@ const HomePage = () => {
     if (storedActiveTab) {
       setActiveTab(storedActiveTab);
     }
-  }, []);
+    
+  }, [points]);
 
   const GetUserData = async (token: string) => {
     try {
@@ -64,7 +74,11 @@ const HomePage = () => {
       setUserRole(user.role)
       setProfilePic(user.profilePic)
       localStorage.setItem('UserId', userId);
-      setPoints(user.points);
+
+      //setPoints(user.points);
+
+      dispatch(fetchUserPoints(userId));
+      
     } catch (error) {
       console.log(error)
     }
@@ -194,7 +208,7 @@ const HomePage = () => {
                   alt="DefaultUserPic"
                   className="w-16 h-16 rounded-full cursor-pointer"
                 />
-                <p className="ml-5 mr-8">{points}</p>
+                <p className="ml-5 mr-8">{status === 'loading' ? 'Loading...' : points}</p>
               </div>
               {/* Hamburger menu button */}
               <button
