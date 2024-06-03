@@ -4,6 +4,7 @@ import Location from '../Location/Location'
 import Guess from '../Guess/Guess'
 import BestGuessLocation from '../Location/BestGuessLocation'
 import { toast, ToastContainer } from 'react-toastify'; 
+import { useGetGuessesByUserIdQuery } from '../../services/api';
 
 
 interface LocationInterface {
@@ -21,18 +22,26 @@ const Landing = () => {
   const [locations, setLocations] = useState<LocationInterface[]>([])
   const [guessing, setGuessing] = useState(false)
   const [selectedLocation, setSelectedLocation] = useState<LocationInterface | null>(null)
-  const [guesses, setGuesses] = useState<Guess[]>([]);
+ 
+  //const [guesses, setGuesses] = useState<Guess[]>([]);
+
+  const userId = localStorage.getItem('UserId');
+  const { data: guesses, error, isLoading } = useGetGuessesByUserIdQuery(userId || '');
+  useEffect(() => {
+    if (error) {
+      console.error('Error fetching guesses:', error);
+      toast.error('An error occurred while fetching guesses.');
+    }
+  }, [error]);
 
   useEffect(() => {
-    setBestGuessesData();
+   // setBestGuessesData();
     setLocationsData()
     localStorage.setItem('activeTab', 'homeLanding');
-    //location.reload()
   },)
 
   const setLocationsData = async() => {
     const userID = localStorage.getItem('UserId')
-    //console.log(userID)
     try {
       const LocationsData = await fetch(`http://localhost:3000/locations/other/${userID}`, {
         method: 'GET',
@@ -47,17 +56,14 @@ const Landing = () => {
 
       const LocationsArray = await LocationsData.json();
 
-     // console.log("array: "+LocationsArray)
-
       setLocations(LocationsArray)
-
       
     } catch (error) {
       console.log(error)
     }
   }
 
-  const setBestGuessesData = async () => {
+ /* const setBestGuessesData = async () => {
 
     const id = localStorage.getItem('UserId');
     try {
@@ -67,7 +73,6 @@ const Landing = () => {
       }
       const data: Guess[] = await response.json();
   
-      // Group guesses by LocationID and find the best guess (smallest distance) for each location
       const groupedGuesses: { [key: number]: Guess } = {};
       data.forEach((guess: Guess) => {
         if (!(guess.LocationID in groupedGuesses) || guess.distance < groupedGuesses[guess.LocationID].distance) {
@@ -75,10 +80,8 @@ const Landing = () => {
         }
       });
   
-      // Convert object back to array
       const uniqueGuesses = Object.values(groupedGuesses);
   
-      // Sort unique guesses by distance
       uniqueGuesses.sort((a: Guess, b: Guess) => a.distance - b.distance);
   
       setGuesses(uniqueGuesses);
@@ -89,7 +92,7 @@ const Landing = () => {
      // toast.error('Error:', error);
       //toast.error('An error occurred while fetching guesses.');
     }
-  };
+  };*/
 
   const handleLocationClick = (location: LocationInterface) => {
     setSelectedLocation(location)
@@ -99,6 +102,20 @@ const Landing = () => {
   const handleGuesClose = () => {
     setGuessing(!guessing)
   }
+
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading guesses</div>;
+
+  const groupedGuesses: { [key: number]: Guess } = {};
+  guesses?.forEach((guess: Guess) => {
+    if (!(guess.LocationID in groupedGuesses) || guess.distance < groupedGuesses[guess.LocationID].distance) {
+      groupedGuesses[guess.LocationID] = guess;
+    }
+  });
+
+  const uniqueGuesses = Object.values(groupedGuesses);
+  uniqueGuesses.sort((a: Guess, b: Guess) => a.distance - b.distance);
 
 
   return (
@@ -111,11 +128,11 @@ const Landing = () => {
         <h1 className='text-3xl mb-3 text-green-400'>Personal best guesses</h1>
         <p className='mb-3'>Your personal best guesses appear here. Go on and try to beat your personal records or set a new one!</p>
         <div className='flex flex-wrap gap-4 justify-center md:justify-start'>
-          {guesses.map((guess) => (
+          {uniqueGuesses.map((guess) => (
             <BestGuessLocation key={guess.id} guess={guess}></BestGuessLocation>
           ))}
         </div>
-        <div className='flex justify-center md:justify-start'>
+        <div className='flex justify-center '>
           <button className='mt-5 rounded-lg border border-green-400 text-green-400 w-[6rem]'>Load more</button>
         </div>
       </div>

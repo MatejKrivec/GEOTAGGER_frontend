@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { toast, ToastContainer } from 'react-toastify'; 
+import { useGetLocationByIdQuery } from '../../services/api';
 
 interface Guess {
     id: number;
@@ -22,7 +23,9 @@ interface Guess {
   
 
 const BestGuessLocation = ({guess}: {guess: Guess}) => {
-    const[location, setLocation] = useState<LocationInterface>();
+
+
+   /* const[location, setLocation] = useState<LocationInterface>();
 
     useEffect(()=> {
         setLocationData()
@@ -40,7 +43,18 @@ const BestGuessLocation = ({guess}: {guess: Guess}) => {
             console.error('Error fetching user data:', error);
             //toast.error('Error fetching user data:', error)
         }
-    }
+    }*/
+
+
+    const { data: location, error, isLoading } = useGetLocationByIdQuery(guess.LocationID);
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) {
+    console.error('Error fetching location data:', error);
+    toast.error('Error fetching location data');
+    return <div>Error loading location data</div>;
+  } 
+
   return (
     <div className="cursor-pointer relative h-[10rem] w-[15rem]">
       <div className="absolute inset-0">

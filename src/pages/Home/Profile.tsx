@@ -70,7 +70,6 @@ const Profile = ({profilePic}:{profilePic: string}) => {
       }
       const data: Guess[] = await response.json();
   
-      // Group guesses by LocationID and find the best guess (smallest distance) for each location
       const groupedGuesses: { [key: number]: Guess } = {};
       data.forEach((guess: Guess) => {
         if (!(guess.LocationID in groupedGuesses) || guess.distance < groupedGuesses[guess.LocationID].distance) {
@@ -78,10 +77,8 @@ const Profile = ({profilePic}:{profilePic: string}) => {
         }
       });
   
-      // Convert object back to array
       const uniqueGuesses = Object.values(groupedGuesses);
   
-      // Sort unique guesses by distance
       uniqueGuesses.sort((a: Guess, b: Guess) => a.distance - b.distance);
   
       setGuesses(uniqueGuesses);
@@ -161,7 +158,7 @@ const Profile = ({profilePic}:{profilePic: string}) => {
               <BestGuessLocation key={guess.id} guess={guess}></BestGuessLocation>
             ))}
           </div>
-          <div className='flex justify-center md:justify-start'>
+          <div className='flex justify-center '>
             <button className='mt-5 rounded-lg border border-green-400 text-green-400 w-[6rem]'>Load more</button>
           </div>
         </div>
@@ -185,7 +182,7 @@ const Profile = ({profilePic}:{profilePic: string}) => {
                 <button className='bg-gray-300 h-full w-full flex items-center justify-center text-8xl pb-4' onClick={handleAddLocation}>+</button>
               </div>
             </div>
-            <div className='flex justify-center md:justify-start'>
+            <div className='flex justify-center '>
               <button className='mt-5 rounded-lg border border-green-400 text-green-400 w-[6rem]'>Load more</button>
             </div>
           </>
