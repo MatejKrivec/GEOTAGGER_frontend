@@ -13,6 +13,7 @@ const SignIn = () => {
     const handleToken = async () => {
       const urlParams = new URLSearchParams(window.location.search);
       const token = urlParams.get('token');
+
   
       if (token !== null) {
         

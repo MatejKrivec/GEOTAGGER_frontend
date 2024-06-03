@@ -56,6 +56,7 @@ const HomePage = () => {
       if (!response.ok) {
         toast.error('Failed to decode token');
         throw new Error('Failed to decode token');
+        
       }
 
       const userData = await response.json();
