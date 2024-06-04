@@ -80,7 +80,6 @@ const ChangePassword = ({onClose, onConfirmClose}: {onClose: () => void; onConfi
 
         setShowConfirmation(true)
 
-
       }
 
     } catch{

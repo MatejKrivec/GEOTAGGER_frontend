@@ -8,6 +8,7 @@ import Cookies from 'js-cookie';
 import ForgotPassword from './pages/Auth/ForgotPassword';
 import ResetPassword from './pages/Auth/ResetPassword';
 import AdminHomePage from './pages/AdminHomePage';
+import ErrorComponent from './pages/Error/ErrorComponent';
 
 
 
@@ -16,6 +17,7 @@ function App() {
 
   return (
     <Router>
+      <ErrorComponent /> 
       <Routes>
         <Route path="/" element={<InitPage />} />
         <Route path="/Signin" element={<SignIn />} />

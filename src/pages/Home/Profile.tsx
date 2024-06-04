@@ -5,6 +5,7 @@ import AddLocation from '../Location/AddLocation';
 import EditLocation from '../Location/EditLocation';
 import BestGuessLocation from '../Location/BestGuessLocation';
 import { toast, ToastContainer } from 'react-toastify'; 
+import { useError } from '../Error/ErrorContext';
 
 
 
@@ -28,6 +29,8 @@ interface Guess {
 
 
 const Profile = ({profilePic}:{profilePic: string}) => {
+
+  const { displayError } = useError();
 
   const [ime, setIme] = useState('');
   const [addLocation, setAddLocation] = useState(false)
@@ -84,6 +87,13 @@ const Profile = ({profilePic}:{profilePic: string}) => {
       setGuesses(uniqueGuesses);
     } catch (error) {
       console.error('Error:', error);
+      if (typeof error === 'string') {
+        displayError(error);
+      } else if (error instanceof Error) {
+        displayError(error.message);
+      } else {
+        displayError('An unexpected error occurred.');
+      }
      // toast.error('An error occurred while fetching guesses.');
     }
   };

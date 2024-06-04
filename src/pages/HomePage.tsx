@@ -10,6 +10,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import { AppDispatch, RootState } from '../app/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserPoints } from '../features/userSlice';
+import { useError } from './Error/ErrorContext';
 
 const HomePage = () => {
   const [showSettingsPopup, setShowSettingsPopup] = useState(false);
@@ -18,6 +19,8 @@ const HomePage = () => {
   const [profilePic, setProfilePic] = useState('');
   const [userRole, setUserRole] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const { displayError } = useError();
 
   const dispatch = useDispatch<AppDispatch>();
   
@@ -82,6 +85,13 @@ const HomePage = () => {
       
     } catch (error) {
       console.log(error)
+      if (typeof error === 'string') {
+        displayError(error);
+      } else if (error instanceof Error) {
+        displayError(error.message);
+      } else {
+        displayError('An unexpected error occurred.');
+      }
     }
   };
 
