@@ -13,14 +13,15 @@ import { fetchUserPoints } from '../features/userSlice';
 import { useError } from './Error/ErrorContext';
 
 const HomePage = () => {
+
+  const { displayError } = useError();
+
   const [showSettingsPopup, setShowSettingsPopup] = useState(false);
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
   const [activeTab, setActiveTab] = useState(localStorage.getItem('activeTab'));
   const [profilePic, setProfilePic] = useState('');
   const [userRole, setUserRole] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
-
-  const { displayError } = useError();
 
   const dispatch = useDispatch<AppDispatch>();
   
@@ -41,6 +42,24 @@ const HomePage = () => {
     if (storedActiveTab) {
       setActiveTab(storedActiveTab);
     }
+
+  /*  const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const datetime = new Date();
+  
+      logUserActivity({
+        userId: parseInt(localStorage.getItem('UserId') || '0'),
+        action: 'SCROLL',
+        componentType: 'WINDOW',
+        newValue: scrollPosition.toString(),
+        location: window.location.href,
+        createdAt: datetime
+      });
+    };
+  
+    window.addEventListener('scroll', handleScroll);
+  
+    return () => window.removeEventListener('scroll', handleScroll);*/
     
   }, [points]);
 
