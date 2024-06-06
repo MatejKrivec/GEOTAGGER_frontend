@@ -43,6 +43,7 @@ const HomePage = () => {
       setActiveTab(storedActiveTab);
     }
 
+    //SCROLL LOGING
   /*  const handleScroll = () => {
       const scrollPosition = window.scrollY;
       const datetime = new Date();

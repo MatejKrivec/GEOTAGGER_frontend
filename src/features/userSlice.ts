@@ -24,6 +24,13 @@ export const updateUserPoints = createAsyncThunk('user/updateUserPoints', async 
   return response.data.points;
 });
 
+export const addUserPoints = createAsyncThunk('user/addUserPoints', async ({ userId, points }: { userId: string; points: number }) => {
+  const response = await axios.patch(`http://localhost:3000/users/addUserPoints/${userId}`, { points });
+  return response.data.points;
+});
+
+
+
 const userSlice = createSlice({
   name: 'user',
   initialState,
@@ -49,6 +56,18 @@ const userSlice = createSlice({
         state.points = action.payload;
       })
       .addCase(updateUserPoints.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message ?? null;
+      })
+      .addCase(addUserPoints.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(addUserPoints.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        // Here, you might want to add the points to the existing points instead of replacing them
+        state.points += action.payload;
+      })
+      .addCase(addUserPoints.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message ?? null;
       });

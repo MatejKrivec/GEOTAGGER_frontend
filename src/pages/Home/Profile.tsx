@@ -30,6 +30,8 @@ interface Guess {
 
 const Profile = ({profilePic}:{profilePic: string}) => {
 
+
+
   const { displayError } = useError();
 
   const [ime, setIme] = useState('');
@@ -39,9 +41,11 @@ const Profile = ({profilePic}:{profilePic: string}) => {
   const [selectedLocation, setSelectedLocation] = useState<LocationInterface | null>(null);
   const [guesses, setGuesses] = useState<Guess[]>([]);
 
+
   useEffect(() => {
     SetUserData();
     setBestGuessesData();
+   // localStorage.setItem('activeTab', 'profile');
    
   }, ); 
 
@@ -51,6 +55,7 @@ const Profile = ({profilePic}:{profilePic: string}) => {
 
   const closeAddLocation = () => {
     setAddLocation(!addLocation)
+  //  location.reload()
   }
 
   const handleEditLocation = (location: LocationInterface) => {

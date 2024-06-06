@@ -1,6 +1,9 @@
 import React, { useDebugValue, useEffect, useState } from 'react'
 import GoogleMapComponent from './GoogleMapComponent';
 import { toast, ToastContainer } from 'react-toastify'; 
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState, AppDispatch } from '../../app/store';
+import { addUserPoints } from '../../features/userSlice';
 
 
 
@@ -9,6 +12,8 @@ const AddLocation = ({Close}: {Close: () => void}) => {
     const [locationImage, setLocationImage] = useState("src/assets/images/placeholder-image 1.png");
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [location, setLocation] = useState('');
+
+    const dispatch = useDispatch<AppDispatch>();
     
 
     const handleAddLocation = async() => {
@@ -72,9 +77,13 @@ const AddLocation = ({Close}: {Close: () => void}) => {
             }
 
             const userID = localStorage.getItem('UserId');
+
+            if (userID === null) {
+              throw new Error('User ID not found in localStorage');
+            }
             const points = 10
 
-            const updateResponse = await fetch(`http://localhost:3000/users/addUserPoints/${userID}`, {
+          /*  const updateResponse = await fetch(`http://localhost:3000/users/addUserPoints/${userID}`, {
                 method: 'PATCH',
                 headers: {
                 'Content-Type': 'application/json'
@@ -84,7 +93,10 @@ const AddLocation = ({Close}: {Close: () => void}) => {
         
             if (!updateResponse.ok) {
                 throw new Error('Error updating user points');
-            }
+            }*/
+
+            dispatch(addUserPoints({ userId: userID, points: points }));
+            
         
             console.log('User points updated successfully');
             toast.success('User points updated successfully')
@@ -92,7 +104,6 @@ const AddLocation = ({Close}: {Close: () => void}) => {
         } catch (error) {
             
         }
-
         Close();
     }
 
