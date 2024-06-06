@@ -1,6 +1,7 @@
 import React from 'react';
 import { PencilIcon, TrashIcon } from '@heroicons/react/16/solid';
 import { toast, ToastContainer } from 'react-toastify'; 
+import Cookies from 'js-cookie';
 
 
 interface Location {
@@ -30,12 +31,15 @@ const MyLocation = ({ EditVisable, location }: LocationProps) => {
 
       //const id = location.id
 
+      const token = Cookies.get('token');
+
       try {
 
         const deleteLocationPhoto = await fetch(`http://localhost:3000/aws/${location.id}`,{
           method: "DELETE",
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            'Authorization': `Bearer ${token}`
           },
           body: JSON.stringify({key: "Locations/"})
         })
@@ -44,8 +48,15 @@ const MyLocation = ({ EditVisable, location }: LocationProps) => {
           throw new Error("Failed to delete location")
         }
 
+
+      
+
         const deleteLocation = await fetch(`http://localhost:3000/locations/${location.id}`,{
           method: "DELETE",
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
         })
 
         if(!deleteLocation.ok){

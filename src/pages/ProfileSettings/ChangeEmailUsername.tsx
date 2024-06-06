@@ -3,6 +3,7 @@ import ChangePassword from './ChangePassword'
 import ChangeProfilePic from './ChangeProfilePic'
 import Conformation from './Conformation'
 import { toast, ToastContainer } from 'react-toastify'; 
+import Cookies from 'js-cookie';
 
 const ChangeEmapilUsername = ({onClose,onCloseClick}: {onClose: () => void,onCloseClick: () => void}) => {
 
@@ -40,6 +41,8 @@ const ChangeEmapilUsername = ({onClose,onCloseClick}: {onClose: () => void,onClo
 
     const handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault(); 
+
+        const token = Cookies.get('token');
         try{
             const userId = localStorage.getItem('UserId')
 
@@ -49,10 +52,12 @@ const ChangeEmapilUsername = ({onClose,onCloseClick}: {onClose: () => void,onClo
                 email: userData.email, 
             };
 
+
             const response = await fetch(`http://localhost:3000/users/${userId}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify(updatedUserData),
             })

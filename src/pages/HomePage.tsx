@@ -87,7 +87,12 @@ const HomePage = () => {
       const userId = userData.id;
       const profilePicture = userData.profilePic;
 
-      const data = await fetch(`http://localhost:3000/users/${userId}`)
+      const data = await fetch(`http://localhost:3000/users/${userId}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      })
       const user = await data.json()
 
       if (!data.ok) {
@@ -116,11 +121,14 @@ const HomePage = () => {
   };
 
   const logUserActivity = async (activity: { userId: number; action: string; componentType: string; newValue: string; location: string; createdAt: Date }) => {
+    const token = Cookies.get('token');
+    
     try {
       const response = await fetch('http://localhost:3000/user-activity', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(activity)
       });

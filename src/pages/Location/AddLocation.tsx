@@ -4,6 +4,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '../../app/store';
 import { addUserPoints } from '../../features/userSlice';
+import Cookies from 'js-cookie';
 
 
 
@@ -17,6 +18,8 @@ const AddLocation = ({Close}: {Close: () => void}) => {
     
 
     const handleAddLocation = async() => {
+
+
         if(locationImage === "src/assets/images/placeholder-image 1.png") {
             console.log('image cant be default')
             toast.error('you have to add an image')
@@ -28,6 +31,8 @@ const AddLocation = ({Close}: {Close: () => void}) => {
             return
         }
 
+        const token = Cookies.get('token');
+
         try {
             if (!selectedFile) {
                 throw new Error('No file selected');
@@ -35,16 +40,18 @@ const AddLocation = ({Close}: {Close: () => void}) => {
               }
 
             const formData = new FormData();
-            formData.append('profilePic', selectedFile);
+            formData.append('locationPic', selectedFile);
         
             const IDuser = localStorage.getItem('UserId')!; // Type assertion with `!`
-            formData.append('userId', IDuser);
 
             const key = 'Locations/'
             formData.append('key', key);
         
-            const response = await fetch('http://localhost:3000/aws/upload-profile-pic', {
+            const response = await fetch('http://localhost:3000/aws/upload-location-pic', {
                 method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                  },
                 body: formData
             });
 
@@ -61,7 +68,8 @@ const AddLocation = ({Close}: {Close: () => void}) => {
             const create = await fetch('http://localhost:3000/locations', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify({
                     userID: parseInt(IDuser),

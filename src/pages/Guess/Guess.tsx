@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '../../app/store';
 import { updateUserPoints, fetchUserPoints } from '../../features/userSlice';
+import Cookies from 'js-cookie';
 
 
 interface LocationInterface {
@@ -136,6 +137,7 @@ const Guess = ({ location, onClose}: { location: LocationInterface, onClose: () 
   const handleGuessClick = async () => {
     handleLocationSelect(guessedLocation, location.location);
    // setErrorDistance(Distance);
+   const token = Cookies.get('token');
   
     try {
       const date = Date.now();
@@ -146,6 +148,7 @@ const Guess = ({ location, onClose}: { location: LocationInterface, onClose: () 
         throw new Error('User ID not found in localStorage');
       }
 
+      
       const userResponse = await fetch(`http://localhost:3000/users/${userID}`, {
         method: 'GET',
         headers: {
@@ -172,7 +175,8 @@ const Guess = ({ location, onClose}: { location: LocationInterface, onClose: () 
       const postResponse = await fetch(`http://localhost:3000/guesses`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({
           UserID: parseInt(userID),

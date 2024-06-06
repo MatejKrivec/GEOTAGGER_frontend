@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import GoogleMapComponent from './GoogleMapComponent';
 import { useJsApiLoader, Libraries } from '@react-google-maps/api';
 import { toast, ToastContainer } from 'react-toastify'; 
+import Cookies from 'js-cookie';
 
 
 const libraries: Libraries = ['places'];
@@ -54,6 +55,8 @@ const EditLocation = ({ Close, LocationToEdit }: { Close: () => void; LocationTo
   }, [isLoaded]);
 
   const handleEditLocation = async () => {
+
+
     if (locationImage === locationImage2 && location === location2) {
       console.log('No changes to edit');
       toast.error('No changes to edit');
@@ -69,14 +72,19 @@ const EditLocation = ({ Close, LocationToEdit }: { Close: () => void; LocationTo
       data.location = location;
     }
 
+    const token = Cookies.get('token');
+
     if (locationImage !== locationImage2 && selectedFile) {
       const formData = new FormData();
-      formData.append('profilePic', selectedFile);
+      formData.append('locationPic', selectedFile);
       formData.append('locationID', locationID);
       formData.append('key', 'Locations/');
 
-      const response = await fetch('http://localhost:3000/aws/upload-location-pic', {
+      const response = await fetch('http://localhost:3000/aws/edit-location-pic', {
         method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
         body: formData,
       });
 
@@ -94,6 +102,7 @@ const EditLocation = ({ Close, LocationToEdit }: { Close: () => void; LocationTo
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(data),
       });

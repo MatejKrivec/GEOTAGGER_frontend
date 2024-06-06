@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Conformation from './Conformation'
 import { toast, ToastContainer } from 'react-toastify';
+import Cookies from 'js-cookie';
 
 const ChangePassword = ({onClose, onConfirmClose}: {onClose: () => void; onConfirmClose: () => void;}) => {
 
@@ -63,11 +64,14 @@ const ChangePassword = ({onClose, onConfirmClose}: {onClose: () => void; onConfi
           return;
         }
 
+        const token = Cookies.get('token');
+
         const newPassword = formData.newPassword;
         const update = await fetch(`http://localhost:3000/users/updatePassword/${userId}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({ password: newPassword }), 
         });

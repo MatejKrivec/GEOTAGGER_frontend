@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Conformation from './Conformation';
 import { toast, ToastContainer } from 'react-toastify';
+import Cookies from 'js-cookie';
 
 const ChangeProfilePic = ({ onClose, onConfirmClose }: { onClose: () => void; onConfirmClose: () => void }) => {
   const [showConfirmation, setShowConfirmation] = useState(false);
@@ -28,6 +29,9 @@ const ChangeProfilePic = ({ onClose, onConfirmClose }: { onClose: () => void; on
 
   const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault(); 
+
+    const token = Cookies.get('token');
+    
     try {
       if (!selectedFile) {
         throw new Error('No file selected');
@@ -41,9 +45,14 @@ const ChangeProfilePic = ({ onClose, onConfirmClose }: { onClose: () => void; on
 
       const key = 'UserImages/'
       formData.append('key', key);
+
+      
   
       const response = await fetch('http://localhost:3000/aws/upload-profile-pic', {
         method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
         body: formData
       });
 
@@ -52,15 +61,18 @@ const ChangeProfilePic = ({ onClose, onConfirmClose }: { onClose: () => void; on
         throw new Error('Failed to upload image');
       }
 
-      const responseData = await response.json(); // Assuming the response contains JSON data
-    const imageUrl = responseData.imageUrl;
+      const responseData = await response.json(); 
+      const imageUrl = responseData.imageUrl;
 
-    // Assuming you have a userId
+   
+
+
     const userId = localStorage.getItem('UserId');
     const patchResponse = await fetch(`http://localhost:3000/users/${userId}`, {
       method: 'PATCH',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
       },
       body: JSON.stringify({ profilePic: imageUrl })
     });
