@@ -138,6 +138,8 @@ const SignIn = () => {
         toast.error((error as Error).message);
       }
 
+
+
     } catch (error) {
       console.error('Error logging in:', error);
       toast.error((error as Error).message);
