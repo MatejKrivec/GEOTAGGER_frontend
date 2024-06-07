@@ -20,49 +20,43 @@ const ResetPassword = () => {
   };
 
   const handleSubmit = async (e: { preventDefault: () => void; }) => {
-    e.preventDefault(); 
+    e.preventDefault();
     try {
+
+         // Check if passwords match
+         if (formData.newPassword !== formData.confirmNewPassword) {
+          console.log('Passwords do not match');
+          toast.error('Passwords do not match');
+          return;
+        }
+
+      // Validate token
       const response = await fetch('http://localhost:3000/ResetPassword/validate-token', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ token: formData.token }),
+        body: JSON.stringify({ 
+          token: formData.token,
+          newPassword: formData.newPassword,
+         }),
       });
-
+  
       if (!response.ok) {
-        throw new Error('Error validating');
+        throw new Error('Error validating token');
       }
-
+  
       const data = await response.json();
       const userId = data.userId;
-      console.log('user id: ' + userId);
-
-      console.log('Token is valid');
-
-      if (formData.newPassword !== formData.confirmNewPassword) {
-        console.log('Passwords do not match');
-        toast.error('Passwords do not match');
-        return;
-      }
-
-      const newPassword = formData.newPassword;
-      const update = await fetch(`http://localhost:3000/users/updatePassword/${userId}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ password: newPassword }),
-      });
-
-      if (!update.ok) {
-        console.log('Error updating user');
-        throw new Error('Error updating user');
-      }
-
+      console.log('User id:', userId);
+  
+   
+  
       setResetSuccess(true);
+      console.log('Password reset successful');
     } catch (error) {
-      console.error('Error validating token:', error);
+      console.error('Error resetting password:', error);
+      toast.error('Error resetting password');
     }
   };
 
