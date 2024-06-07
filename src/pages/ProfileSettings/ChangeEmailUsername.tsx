@@ -17,10 +17,17 @@ const ChangeEmapilUsername = ({onClose,onCloseClick}: {onClose: () => void,onClo
       });
 
     useEffect(() => {
+      const token = Cookies.get('token');
 
         const setFormData = async () => {
             const userId = localStorage.getItem('UserId')
-            const response = await fetch(`http://localhost:3000/users/${userId}`)
+            const response = await fetch(`http://localhost:3000/users/${userId}`, {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+              }
+            })
             const data = await response.json()
             const [firstName, lastName] = data.username.split(' ');
             setUserData({

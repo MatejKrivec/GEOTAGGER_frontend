@@ -13,9 +13,17 @@ const ChangeProfilePic = ({ onClose, onConfirmClose }: { onClose: () => void; on
   }, []);
 
   const setData = async () => {
+    const token = Cookies.get('token');
+    
     try {
       const userId = localStorage.getItem('UserId');
-      const data = await fetch(`http://localhost:3000/users/${userId}`);
+      const data = await fetch(`http://localhost:3000/users/${userId}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      })
       const user = await data.json();
       setProfilePic(user.profilePic);
     } catch (error) {

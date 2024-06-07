@@ -47,7 +47,7 @@ const Profile = ({profilePic}:{profilePic: string}) => {
     setBestGuessesData();
    // localStorage.setItem('activeTab', 'profile');
    
-  }, ); 
+  }, [addLocation, selectedLocation, locations]); 
 
   const handleAddLocation = () => {
       setAddLocation(!addLocation)
@@ -69,12 +69,20 @@ const Profile = ({profilePic}:{profilePic: string}) => {
   }
 
   const setBestGuessesData = async () => {
-
+    const token = Cookies.get('token');
     const id = localStorage.getItem('UserId');
     try {
-      const response = await fetch(`http://localhost:3000/guesses/user/${id}`);
+      const response = await fetch(`http://localhost:3000/guesses/user/${id}`,{
+        method: 'GET',
+        headers: {
+          'Contetn-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      })
+
       if (!response.ok) {
-        throw new Error('Error fetching guesses');
+       // throw new Error('Error fetching guesses');
+       console.log('Error fetching guesses');
       }
       const data: Guess[] = await response.json();
   
@@ -91,14 +99,17 @@ const Profile = ({profilePic}:{profilePic: string}) => {
   
       setGuesses(uniqueGuesses);
     } catch (error) {
-      console.error('Error:', error);
-      if (typeof error === 'string') {
+
+      ////ERROR COMPONENT
+
+      //console.error('Error:', error);
+    /*  if (typeof error === 'string') {
         displayError(error);
       } else if (error instanceof Error) {
         displayError(error.message);
       } else {
         displayError('An unexpected error occurred.');
-      }
+      }*/
      // toast.error('An error occurred while fetching guesses.');
     }
   };
@@ -106,17 +117,20 @@ const Profile = ({profilePic}:{profilePic: string}) => {
 
   const SetUserData = async () => {
     const id = localStorage.getItem('UserId');
-    
+    const token = Cookies.get('token');
+
     try {
         const response = await fetch(`http://localhost:3000/users/${id}`, {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                 'Authorization': `Bearer ${token}`
             },
         });
         
         if (!response.ok) {
-            throw new Error('error');
+          //  throw new Error('error');
+            console.log('error');
         }
 
         const userData = await response.json();
@@ -126,12 +140,13 @@ const Profile = ({profilePic}:{profilePic: string}) => {
         const locationsData = await fetch(`http://localhost:3000/locations/user/${id}`,{
           method: 'GET',
           headers: {
-            'Contetn-Type': 'application/json'
+            'Contetn-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
           }
         })
 
         if (!locationsData.ok) {
-          throw new Error('error');
+         // throw new Error('error');
         }
 
         const locationArray = await locationsData.json()
@@ -140,7 +155,7 @@ const Profile = ({profilePic}:{profilePic: string}) => {
 
         
     } catch (error) {
-        console.error('Error fetching username:', error);
+       // console.error('Error fetching username:', error);
       //  toast.error(error.message +"sadasdasdasdad");
     }
 }; 

@@ -24,7 +24,7 @@ interface Guess {
 
 const BestGuessLocation = ({guess}: {guess: Guess}) => {
 
-
+    //Tole je blo pred RTK Query
    /* const[location, setLocation] = useState<LocationInterface>();
 
     useEffect(()=> {

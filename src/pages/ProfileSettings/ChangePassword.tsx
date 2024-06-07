@@ -27,6 +27,9 @@ const ChangePassword = ({onClose, onConfirmClose}: {onClose: () => void; onConfi
 
   const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault(); 
+
+    const token = Cookies.get('token');
+
     try{
 
       console.log(formData)
@@ -49,6 +52,7 @@ const ChangePassword = ({onClose, onConfirmClose}: {onClose: () => void; onConfi
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({ password: formData.currentPassword }),
         });
@@ -64,7 +68,6 @@ const ChangePassword = ({onClose, onConfirmClose}: {onClose: () => void; onConfi
           return;
         }
 
-        const token = Cookies.get('token');
 
         const newPassword = formData.newPassword;
         const update = await fetch(`http://localhost:3000/users/updatePassword/${userId}`, {
@@ -87,10 +90,7 @@ const ChangePassword = ({onClose, onConfirmClose}: {onClose: () => void; onConfi
       }
 
     } catch{
-
     }
-
-   // setShowConfirmation(!showConfirmation)
   }
 
   const handleConformationClose = () => {

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { MagnifyingGlassIcon } from '@heroicons/react/16/solid';
 import { toast } from 'react-toastify';
+import Cookies from 'js-cookie';
 
 interface User {
   username: string;
@@ -22,8 +23,15 @@ const ActivityLogItem = ({ activity }: {activity: Activity}) => {
 
   useEffect(() => {
     const fetchUser = async () => {
+      const token = Cookies.get('token');
       try {
-        const response = await fetch(`http://localhost:3000/users/${activity.userId}`);
+        const response = await fetch(`http://localhost:3000/users/${activity.userId}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          }
+        })
         if (!response.ok) {
           throw new Error('Failed to fetch user');
         }

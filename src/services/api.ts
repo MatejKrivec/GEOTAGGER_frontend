@@ -1,4 +1,5 @@
 import {  createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import Cookies from 'js-cookie';
 
 export interface LocationInterface {
     id: number;
@@ -20,7 +21,17 @@ export interface LocationInterface {
   
   export const api = createApi({
     reducerPath: 'api',
-    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000/' }),
+    baseQuery: fetchBaseQuery({
+      baseUrl: 'http://localhost:3000/',
+      prepareHeaders: (headers) => {
+        const token = Cookies.get('token'); // Fetch the token dynamically
+      if (token) {
+        headers.set('Authorization', `Bearer ${token}`);
+      }
+        headers.set('Authorization', `Bearer ${token}`);
+        return headers;
+      },
+    }),
     endpoints: (builder) => ({
       getLocationById: builder.query<LocationInterface, number>({
         query: (id) => `locations/${id}`,

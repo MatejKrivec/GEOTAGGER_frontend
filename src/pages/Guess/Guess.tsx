@@ -81,7 +81,7 @@ const Guess = ({ location, onClose}: { location: LocationInterface, onClose: () 
     fetchGuesses();
 
     console.log(guesses)
-  }, [location.id]);
+  }, [location.id, guesses, errorDistance]);
 
   const fetchGuesses = async () => {
     try {
@@ -153,8 +153,9 @@ const Guess = ({ location, onClose}: { location: LocationInterface, onClose: () 
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-        },
-      });
+          'Authorization': `Bearer ${token}`
+        }
+      })
 
       if (!userResponse.ok) {
         throw new Error('Error fetching user data');
@@ -201,7 +202,8 @@ const Guess = ({ location, onClose}: { location: LocationInterface, onClose: () 
       const countResponse = await fetch(`http://localhost:3000/guesses/count/${userID}/${location.id}`, {
         method: 'GET',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+           'Authorization': `Bearer ${token}`
         }
       });
   

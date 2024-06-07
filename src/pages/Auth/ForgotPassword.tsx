@@ -49,13 +49,8 @@ const ForgotPassword = () => {
                       toast.error('Failed to send email: ' + error.text);
                   },
               );
-
-              //console.log('doneeeee')
-        
       
-            // Redirect to the ResetPassword page upon success
             window.location.href = '/ResetPassword';
-          //  navigate('/ResetPassword')
 
           } catch (error) {
             console.error('Error sending reset token:', error);

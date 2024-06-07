@@ -9,7 +9,7 @@ import Cookies from 'js-cookie';
 import { toast, ToastContainer } from 'react-toastify';
 import { AppDispatch, RootState } from '../app/store';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUserPoints } from '../features/userSlice';
+import { fetchUserPoints, selectUserPoints, selectUserStatus } from '../features/userSlice';
 import { useError } from './Error/ErrorContext';
 
 const HomePage = () => {
@@ -20,12 +20,14 @@ const HomePage = () => {
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
   const [activeTab, setActiveTab] = useState(localStorage.getItem('activeTab'));
   const [profilePic, setProfilePic] = useState('');
-  const [userRole, setUserRole] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
 
   const dispatch = useDispatch<AppDispatch>();
   
-  const points = useSelector((state: RootState) => state.user.points);
+  const points = useSelector(selectUserPoints);
+  const status = useSelector(selectUserStatus);
+
+ // const points = useSelector((state: RootState) => state.user.points);
 
   
 
@@ -91,6 +93,7 @@ const HomePage = () => {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
         }
       })
       const user = await data.json()
@@ -100,7 +103,6 @@ const HomePage = () => {
         throw new Error('Failed to decode token');
       }
 
-      setUserRole(user.role)
       setProfilePic(user.profilePic)
       localStorage.setItem('UserId', userId);
 
@@ -208,9 +210,7 @@ const HomePage = () => {
 
   return (
     <>
-    {userRole === 'admin' ? (
-      <AdminHomePage />
-    ) : (
+    
       <div className="flex flex-col min-h-screen relative">
         <div className="main m-5">
           <div className="headerContainer flex justify-between items-center">
@@ -300,7 +300,7 @@ const HomePage = () => {
         </footer>
         <ToastContainer />
       </div>
-    )}
+    
   </>
   
 

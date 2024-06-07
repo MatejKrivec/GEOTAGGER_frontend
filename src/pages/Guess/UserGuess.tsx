@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { toast, ToastContainer } from 'react-toastify'; 
+import Cookies from 'js-cookie';
 
 interface Guess {
     id: number;
@@ -24,8 +25,16 @@ const UserGuess = ({ guess, index }: { guess: Guess; index: number }) => {
 
     useEffect(() => {
         const fetchUserData = async() => {
+
+          const token = Cookies.get('token');
             try {
-                const userData = await fetch(`http://localhost:3000/users/${guess.UserID}`);
+                const userData = await fetch(`http://localhost:3000/users/${guess.UserID}`, {
+                  method: 'GET',
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                  }
+                })
                 if (!userData.ok) {
                     throw new Error('Error getting user data');
                 }
@@ -38,7 +47,7 @@ const UserGuess = ({ guess, index }: { guess: Guess; index: number }) => {
         }
 
         fetchUserData()
-    })
+    }, [])
 
     let backgroundColor = '';
     if (index === 0) {

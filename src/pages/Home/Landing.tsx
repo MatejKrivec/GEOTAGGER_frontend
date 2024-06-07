@@ -5,6 +5,7 @@ import Guess from '../Guess/Guess'
 import BestGuessLocation from '../Location/BestGuessLocation'
 import { toast, ToastContainer } from 'react-toastify'; 
 import { useGetGuessesByUserIdQuery } from '../../services/api';
+import Cookies from 'js-cookie';
 
 
 interface LocationInterface {
@@ -27,12 +28,14 @@ const Landing = () => {
 
   const userId = localStorage.getItem('UserId');
   const { data: guesses, error, isLoading } = useGetGuessesByUserIdQuery(userId || '');
-  useEffect(() => {
+
+
+  /*useEffect(() => {
     if (error) {
       console.error('Error fetching guesses:', error);
       toast.error('An error occurred while fetching guesses.');
     }
-  }, [error]);
+  }, [error]);*/
 
   useEffect(() => {
    // setBestGuessesData();
@@ -42,11 +45,15 @@ const Landing = () => {
 
   const setLocationsData = async() => {
     const userID = localStorage.getItem('UserId')
+
+    const token = Cookies.get('token');
+
     try {
       const LocationsData = await fetch(`http://localhost:3000/locations/other/${userID}`, {
         method: 'GET',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
         }
       })
 
@@ -104,8 +111,11 @@ const Landing = () => {
   }
 
 
+  //// RTK QUERY CODE v profile je se defauolt nareto
+
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading guesses</div>;
+
 
   const groupedGuesses: { [key: number]: Guess } = {};
   guesses?.forEach((guess: Guess) => {
@@ -117,6 +127,7 @@ const Landing = () => {
   const uniqueGuesses = Object.values(groupedGuesses);
   uniqueGuesses.sort((a: Guess, b: Guess) => a.distance - b.distance);
 
+  ////
 
   return (
     <div className='overflow-y-auto m-5'>

@@ -60,11 +60,9 @@ const ResetPassword = () => {
         throw new Error('Error updating user');
       }
 
-      // Password reset successful, set the state to true
       setResetSuccess(true);
     } catch (error) {
       console.error('Error validating token:', error);
-      // Handle error (e.g., display error message to the user)
     }
   };
 

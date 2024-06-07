@@ -1,6 +1,8 @@
 // src/features/userSlice.ts
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import Cookies from 'js-cookie';
+import { RootState } from '../app/store';
 
 interface UserState {
   points: number;
@@ -15,21 +17,41 @@ const initialState: UserState = {
 };
 
 export const fetchUserPoints = createAsyncThunk('user/fetchUserPoints', async (userId: string) => {
-  const response = await axios.get(`http://localhost:3000/users/${userId}`);
+  const token = Cookies.get('token');
+  const response = await axios.get(`http://localhost:3000/users/${userId}`, {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+  });
   return response.data.points;
 });
 
 export const updateUserPoints = createAsyncThunk('user/updateUserPoints', async ({ userId, points }: { userId: string; points: number }) => {
-  const response = await axios.patch(`http://localhost:3000/users/updateUserPoints/${userId}`, { points });
+  const token = Cookies.get('token');
+  const response = await axios.patch(`http://localhost:3000/users/updateUserPoints/${userId}`, 
+  { points }, 
+  {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+  });
   return response.data.points;
 });
 
 export const addUserPoints = createAsyncThunk('user/addUserPoints', async ({ userId, points }: { userId: string; points: number }) => {
-  const response = await axios.patch(`http://localhost:3000/users/addUserPoints/${userId}`, { points });
+  const token = Cookies.get('token');
+  const response = await axios.patch(`http://localhost:3000/users/addUserPoints/${userId}`, 
+  { points }, 
+  {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+  });
   return response.data.points;
 });
-
-
 
 const userSlice = createSlice({
   name: 'user',
@@ -64,7 +86,6 @@ const userSlice = createSlice({
       })
       .addCase(addUserPoints.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        // Here, you might want to add the points to the existing points instead of replacing them
         state.points += action.payload;
       })
       .addCase(addUserPoints.rejected, (state, action) => {
@@ -74,4 +95,6 @@ const userSlice = createSlice({
   },
 });
 
+export const selectUserPoints = (state: RootState) => state.user.points;
+export const selectUserStatus = (state: RootState) => state.user.status;
 export default userSlice.reducer;

@@ -64,8 +64,13 @@ function RouteGuard() {
         const userData = await response.json();
         const userId = userData.id;
 
-        const userResponse = await fetch(`http://localhost:3000/users/${userId}`);
-
+        const userResponse = await fetch(`http://localhost:3000/users/${userId}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          }
+        })
         if (!userResponse.ok) {
           throw new Error('Failed to fetch user');
           console.log('Failed to fetch user');

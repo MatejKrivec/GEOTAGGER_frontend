@@ -4,6 +4,7 @@ import Logout from './ProfileSettings/Logout';
 import { MagnifyingGlassIcon } from '@heroicons/react/16/solid';
 import { toast, ToastContainer } from 'react-toastify';
 import ActivityLogItem from './UserActivity/ActivityLogItem';
+import Cookies from 'js-cookie';
 
 interface User {
   username: string;
@@ -30,8 +31,18 @@ const AdminHomePage: React.FC = () => {
   }, []);
 
   const fetchActivities = async () => {
+
+    const token = Cookies.get('token');
+
     try {
-      const response = await fetch('http://localhost:3000/user-activity/latest');
+      const response = await fetch('http://localhost:3000/user-activity/latest', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+      });
+
       if (!response.ok) {
         throw new Error('Failed to fetch user activities');
       }
