@@ -4,8 +4,6 @@ import Cookies from 'js-cookie';
 
 const Logout = ({onClose}:{onClose: () => void}) => {
 
-    //const navigate = useNavigate();
-
     const handleCloseLogout = () => {
         onClose();
     }

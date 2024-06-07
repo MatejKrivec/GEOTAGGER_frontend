@@ -24,7 +24,7 @@ export interface LocationInterface {
     baseQuery: fetchBaseQuery({
       baseUrl: 'http://localhost:3000/',
       prepareHeaders: (headers) => {
-        const token = Cookies.get('token'); // Fetch the token dynamically
+        const token = Cookies.get('token'); 
       if (token) {
         headers.set('Authorization', `Bearer ${token}`);
       }

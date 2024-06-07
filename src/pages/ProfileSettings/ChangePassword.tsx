@@ -37,11 +37,10 @@ const ChangePassword = ({onClose, onConfirmClose}: {onClose: () => void; onConfi
       if (!formData.newPassword && !formData.repeatNewPassword) {
           console.log('Please fill in all password fields.');
           toast.error('Please fill in all password fields.');
-          return; // Return early if any password is empty
+          return; 
       }
 
       if (formData.newPassword !== formData.repeatNewPassword) {
-        //toast.error('Passwords do not match');
         console.log('Passwords do not match')
         toast.error('Passwords do not match')
       }
@@ -62,7 +61,6 @@ const ChangePassword = ({onClose, onConfirmClose}: {onClose: () => void; onConfi
         console.log(isPasswordValid)
 
         if (isPasswordValid === 'false') {
-          //toast.error('Invalid current password');
           console.log('invalid current pasword!!!!')
           toast.error('invalid current pasword!!!!')
           return;

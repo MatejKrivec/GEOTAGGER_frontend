@@ -106,8 +106,6 @@ const HomePage = () => {
       setProfilePic(user.profilePic)
       localStorage.setItem('UserId', userId);
 
-      //setPoints(user.points);
-
       dispatch(fetchUserPoints(userId));
       
     } catch (error) {
@@ -218,7 +216,6 @@ const HomePage = () => {
               <img src="src/assets/images/geotagger_logo.PNG" alt="logo" />
             </div>
             <div className="SignIN-SignUP-container flex items-center md:justify-between justify-end">
-              {/* Menu items */}
               <div className="hidden md:flex order-2 md:order-1">
               <button
                 className="HomeBTN hover:bg-green-400 hover:text-white text-black font-bold py-2 px-4 rounded mr-2"
@@ -277,7 +274,6 @@ const HomePage = () => {
                     Logout <span>&rarr;</span>
                   </button>
                 </div>
-              {/* Plus button */}
               <button className="hidden md:block text-2xl text-white bg-green-400 rounded-full w-14 h-14 flex items-center justify-center order-4 md:order-4">+</button>
             </div>
           </div>

@@ -18,7 +18,7 @@ const center = {
 const GoogleMapComponent = ({ onLocationSelect }: { onLocationSelect: (address: string) => void }) => {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: 'AIzaSyCdwFcRukCF5DwPyaa15dXxX-Ls3Tq55Lo',
+    googleMapsApiKey: 'AIzaSyCgJ8LbG1xEChvwgnIIt4dQmBEzaW2nqsY',
     libraries
   });
 
@@ -32,7 +32,6 @@ const GoogleMapComponent = ({ onLocationSelect }: { onLocationSelect: (address: 
     if (lat !== undefined && lng !== undefined) {
       setMarkerPosition({ lat, lng });
 
-      // Geocoding the clicked location
       const geocoder = new window.google.maps.Geocoder();
       geocoder.geocode({ location: { lat, lng } }, (results, status) => {
         if (status === 'OK' && results && results[0]) {

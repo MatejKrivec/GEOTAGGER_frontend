@@ -14,9 +14,11 @@ const center = {
 };
 
 const GoogleMapComponent = ({ onLocationSelect }: { onLocationSelect: (address: string, location: any) => void }) => {
+
+  //Baje se ta api key restricta na google konzoli kjer ga lahko potem uporablja samo ena domena
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: 'AIzaSyCdwFcRukCF5DwPyaa15dXxX-Ls3Tq55Lo',
+    googleMapsApiKey: 'AIzaSyCgJ8LbG1xEChvwgnIIt4dQmBEzaW2nqsY',
     libraries
   });
 

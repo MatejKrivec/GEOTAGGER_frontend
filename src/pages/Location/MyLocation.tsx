@@ -64,8 +64,6 @@ const MyLocation = ({ EditVisable, location }: LocationProps) => {
           throw new Error("Failed to delete location")
         }
 
-      //  window.location.reload();
-
       } catch (error) {
         console.log(error)
       }

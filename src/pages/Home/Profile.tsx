@@ -45,7 +45,6 @@ const Profile = ({profilePic}:{profilePic: string}) => {
   useEffect(() => {
     SetUserData();
     setBestGuessesData();
-   // localStorage.setItem('activeTab', 'profile');
    
   }, [addLocation, selectedLocation, locations]); 
 
@@ -55,7 +54,6 @@ const Profile = ({profilePic}:{profilePic: string}) => {
 
   const closeAddLocation = () => {
     setAddLocation(!addLocation)
-  //  location.reload()
   }
 
   const handleEditLocation = (location: LocationInterface) => {
@@ -81,7 +79,7 @@ const Profile = ({profilePic}:{profilePic: string}) => {
       })
 
       if (!response.ok) {
-       // throw new Error('Error fetching guesses');
+        throw new Error('Error fetching guesses');
        console.log('Error fetching guesses');
       }
       const data: Guess[] = await response.json();
@@ -102,14 +100,14 @@ const Profile = ({profilePic}:{profilePic: string}) => {
 
       ////ERROR COMPONENT
 
-      //console.error('Error:', error);
-    /*  if (typeof error === 'string') {
+      console.error('Error:', error);
+      if (typeof error === 'string') {
         displayError(error);
       } else if (error instanceof Error) {
         displayError(error.message);
       } else {
         displayError('An unexpected error occurred.');
-      }*/
+      }
      // toast.error('An error occurred while fetching guesses.');
     }
   };
@@ -129,7 +127,7 @@ const Profile = ({profilePic}:{profilePic: string}) => {
         });
         
         if (!response.ok) {
-          //  throw new Error('error');
+            throw new Error('error');
             console.log('error');
         }
 
@@ -146,7 +144,7 @@ const Profile = ({profilePic}:{profilePic: string}) => {
         })
 
         if (!locationsData.ok) {
-         // throw new Error('error');
+          throw new Error('error');
         }
 
         const locationArray = await locationsData.json()
@@ -155,7 +153,7 @@ const Profile = ({profilePic}:{profilePic: string}) => {
 
         
     } catch (error) {
-       // console.error('Error fetching username:', error);
+        console.error('Error fetching username:', error);
       //  toast.error(error.message +"sadasdasdasdad");
     }
 }; 

@@ -30,12 +30,12 @@ const Landing = () => {
   const { data: guesses, error, isLoading } = useGetGuessesByUserIdQuery(userId || '');
 
 
-  /*useEffect(() => {
+  useEffect(() => {
     if (error) {
       console.error('Error fetching guesses:', error);
       toast.error('An error occurred while fetching guesses.');
     }
-  }, [error]);*/
+  }, [error]);
 
   useEffect(() => {
    // setBestGuessesData();
@@ -111,7 +111,7 @@ const Landing = () => {
   }
 
 
-  //// RTK QUERY CODE v profile je se defauolt nareto
+  //// RTK QUERY CODE v profile je se defauolt nareto da klicem api pa to tui pa uporabljam slice pa api.ts
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading guesses</div>;

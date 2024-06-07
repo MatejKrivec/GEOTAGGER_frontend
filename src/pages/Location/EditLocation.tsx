@@ -64,7 +64,6 @@ const EditLocation = ({ Close, LocationToEdit }: { Close: () => void; LocationTo
     }
 
     const IDuser = localStorage.getItem('UserId')!;
-    //const locationID = LocationToEdit?.id;
     let imageUrl = locationImage2;
     let data: Partial<LocationInterface> = {};
 

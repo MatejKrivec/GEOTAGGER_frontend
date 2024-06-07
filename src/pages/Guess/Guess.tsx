@@ -80,8 +80,9 @@ const Guess = ({ location, onClose}: { location: LocationInterface, onClose: () 
   
     fetchGuesses();
 
-    console.log(guesses)
-  }, [location.id, guesses, errorDistance]);
+    //console.log(guesses)
+
+  }, [location.id, guesses]);
 
   const fetchGuesses = async () => {
     try {
@@ -168,9 +169,6 @@ const Guess = ({ location, onClose}: { location: LocationInterface, onClose: () 
         toast.error('You have zero points. Go upload a location.');
         return;
       }
-      console.log("toaaaaasst22222222")
-
-      
 
 
       const postResponse = await fetch(`http://localhost:3000/guesses`, {
@@ -194,10 +192,10 @@ const Guess = ({ location, onClose}: { location: LocationInterface, onClose: () 
 
       const errorDistanceInput = document.getElementsByName('errorDistance')[0] as HTMLInputElement;
       errorDistanceInput.value = errorDistance.toString();
-      console.log(errorDistance)
+      //console.log(errorDistance)
   
       const newGuess = await postResponse.json();
-      console.log('New guess created:', newGuess);
+      //console.log('New guess created:', newGuess);
   
       const countResponse = await fetch(`http://localhost:3000/guesses/count/${userID}/${location.id}`, {
         method: 'GET',

@@ -4,7 +4,7 @@ import React, { useEffect } from 'react'
 const Conformation = ({onClosee}: {onClosee: () => void}) => {
     
     useEffect(()=> {
-       // console.log("aaaaaaa")
+        console.log("Updated sucesfully")
     })
     const handleCloseConf = () => {
         onClosee();

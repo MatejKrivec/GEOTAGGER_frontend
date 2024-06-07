@@ -24,7 +24,7 @@ interface Activity {
 const AdminHomePage: React.FC = () => {
   const [showSettingsPopup, setShowSettingsPopup] = useState(false);
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
-  const [activities, setActivities] = useState<Activity[]>([]); // State for storing activities
+  const [activities, setActivities] = useState<Activity[]>([]); 
 
   useEffect(() => {
     fetchActivities();
@@ -50,7 +50,7 @@ const AdminHomePage: React.FC = () => {
       setActivities(data);
     } catch (error) {
       console.error('Error fetching activities:', error);
-     // toast.error('Failed to fetch user activities');
+      toast.error('Failed to fetch user activities');
     }
   };
 

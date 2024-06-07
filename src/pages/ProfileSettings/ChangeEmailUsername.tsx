@@ -77,8 +77,8 @@ const ChangeEmapilUsername = ({onClose,onCloseClick}: {onClose: () => void,onClo
            
         }catch(error){
             console.log(`Error updating user details:`+ error)
-          //  toast.error(`Error updating user details: ${error.message}`)
-           // toast.error(`Error updating user details: ${error.message}`);
+          //toast.error(`Error updating user details: ${error.message}`)
+
         }
         
     }

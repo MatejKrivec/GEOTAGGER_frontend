@@ -48,7 +48,7 @@ const ChangeProfilePic = ({ onClose, onConfirmClose }: { onClose: () => void; on
       const formData = new FormData();
       formData.append('profilePic', selectedFile);
   
-      const IDuser = localStorage.getItem('UserId')!; // Type assertion with `!`
+      const IDuser = localStorage.getItem('UserId')!; 
       formData.append('userId', IDuser);
 
       const key = 'UserImages/'
@@ -93,8 +93,8 @@ const ChangeProfilePic = ({ onClose, onConfirmClose }: { onClose: () => void; on
     setShowConfirmation(!showConfirmation);
 
       setShowConfirmation(!showConfirmation);
-    } catch (error) {
-     // toast.error('Error uploading image:', error);
+    } catch (error: any) {
+      toast.error('Error uploading image:', error);
       console.error('Error uploading image:', error);
     }
   };
