@@ -32,7 +32,6 @@ const ChangePassword = ({onClose, onConfirmClose}: {onClose: () => void; onConfi
 
     try{
 
-      console.log(formData)
 
       if (!formData.newPassword && !formData.repeatNewPassword) {
           console.log('Please fill in all password fields.');

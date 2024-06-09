@@ -28,8 +28,6 @@ const ForgotPassword = () => {
             }
         
             const { resetToken, userId } = await response.json();
-            console.log('Reset token:', resetToken);
-            console.log('User ID:', userId);
 
            const templateParams = {
               from_name: 'Matej',
