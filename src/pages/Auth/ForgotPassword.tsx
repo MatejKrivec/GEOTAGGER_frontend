@@ -8,7 +8,11 @@ const ForgotPassword = () => {
     const [Email, setEmail] = useState('');
 
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = () => {
+      
+    }
+
+   /* const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         console.log("email!!!!!!!!!!! " + Email)
@@ -29,7 +33,7 @@ const ForgotPassword = () => {
 
            const templateParams = {
               from_name: 'Matej',
-              to_email: 'matej.krivec6@gmail.com',
+              to_email: 'abrakadabra',
               to_name: 'Uporabnik geotaggerja',
               message: 'tukaj je tvoja koda za resetiranje passworda: ' + resetToken,
           };
@@ -52,7 +56,7 @@ const ForgotPassword = () => {
             console.error('Error sending reset token:', error);
             toast.error((error instanceof Error) ? error.message : 'Error sending reset token');
           }
-    };
+    };*/
     
   return (
     <div className='flex flex-col md:flex-row w-full'>
