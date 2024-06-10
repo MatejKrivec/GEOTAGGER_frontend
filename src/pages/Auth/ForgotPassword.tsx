@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import emailjs from 'emailjs-com';
-import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 
 
 const ForgotPassword = () => {
     const [Email, setEmail] = useState('');
 
-    const navigate = useNavigate()
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -27,7 +25,7 @@ const ForgotPassword = () => {
               throw new Error('Failed to send reset token');
             }
         
-            const { resetToken, userId } = await response.json();
+            const { resetToken} = await response.json();
 
            const templateParams = {
               from_name: 'Matej',

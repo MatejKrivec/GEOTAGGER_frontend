@@ -1,22 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { MagnifyingGlassIcon } from '@heroicons/react/16/solid';
+import  { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import Cookies from 'js-cookie';
+import Activity from '../../assets/Interfaces/Activity';
 
 interface User {
   username: string;
   profilePic: string;
 }
 
-interface Activity {
-  id: number;
-  userId: number;
-  action: string;
-  componentType: string;
-  newValue: string;
-  location: string;
-  createdAt: string;
-}
 
 const ActivityLogItem = ({ activity }: {activity: Activity}) => {
   const [user, setUser] = useState<User | null>(null);

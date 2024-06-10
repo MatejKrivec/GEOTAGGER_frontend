@@ -1,25 +1,18 @@
 import React, { useEffect, useState, useRef } from 'react';
-import GoogleMapComponent from './GoogleMapComponent';
 import { useJsApiLoader, Libraries } from '@react-google-maps/api';
 import { toast, ToastContainer } from 'react-toastify'; 
 import Cookies from 'js-cookie';
+import LocationInterface from '../../assets/Interfaces/Location';
 
 
 const libraries: Libraries = ['places'];
 
-interface LocationInterface {
-  id: number,
-  userID: number,
-  name: String,
-  location: String,
-  photo: String,
-  date: Date,
-}
+
 
 const EditLocation = ({ Close, LocationToEdit }: { Close: () => void; LocationToEdit: LocationInterface | null }) => {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: 'AIzaSyCdwFcRukCF5DwPyaa15dXxX-Ls3Tq55Lo',
+    googleMapsApiKey: 'AIzaSyCgJ8LbG1xEChvwgnIIt4dQmBEzaW2nqsY',
     libraries,
   });
 
@@ -63,7 +56,6 @@ const EditLocation = ({ Close, LocationToEdit }: { Close: () => void; LocationTo
       return;
     }
 
-    const IDuser = localStorage.getItem('UserId')!;
     let imageUrl = locationImage2;
     let data: Partial<LocationInterface> = {};
 

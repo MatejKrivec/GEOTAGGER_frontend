@@ -1,31 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 import Cookies from 'js-cookie';
 import MyLocation from '../Location/MyLocation';
 import AddLocation from '../Location/AddLocation';
 import EditLocation from '../Location/EditLocation';
 import BestGuessLocation from '../Location/BestGuessLocation';
-import { toast, ToastContainer } from 'react-toastify'; 
+import {  ToastContainer } from 'react-toastify'; 
 import { useError } from '../Error/ErrorContext';
+import LocationInterface from '../../assets/Interfaces/Location';
+import GuessInterface from '../../assets/Interfaces/Guess';
 
 
 
-interface LocationInterface {
-  id:       number,
-  userID:   number,
-  name:     String,
-  location: String,
-  photo:    String,
-  date:     Date,
-}
 
-interface Guess {
-  id: number;
-  UserID: number;
-  LocationID: number;
-  guessedLocation: string;
-  distance: number;
-  date: Date;
-}
+
+
 
 
 const Profile = ({profilePic}:{profilePic: string}) => {
@@ -39,7 +27,7 @@ const Profile = ({profilePic}:{profilePic: string}) => {
   const [editLocation, setEditLocation] = useState(false)
   const [locations, setLocations] = useState<LocationInterface[]>([])
   const [selectedLocation, setSelectedLocation] = useState<LocationInterface | null>(null);
-  const [guesses, setGuesses] = useState<Guess[]>([]);
+  const [guesses, setGuesses] = useState<GuessInterface[]>([]);
 
 
   useEffect(() => {
@@ -82,10 +70,10 @@ const Profile = ({profilePic}:{profilePic: string}) => {
         throw new Error('Error fetching guesses');
        console.log('Error fetching guesses');
       }
-      const data: Guess[] = await response.json();
+      const data: GuessInterface[] = await response.json();
   
-      const groupedGuesses: { [key: number]: Guess } = {};
-      data.forEach((guess: Guess) => {
+      const groupedGuesses: { [key: number]: GuessInterface } = {};
+      data.forEach((guess: GuessInterface) => {
         if (!(guess.LocationID in groupedGuesses) || guess.distance < groupedGuesses[guess.LocationID].distance) {
           groupedGuesses[guess.LocationID] = guess;
         }
@@ -93,7 +81,7 @@ const Profile = ({profilePic}:{profilePic: string}) => {
   
       const uniqueGuesses = Object.values(groupedGuesses);
   
-      uniqueGuesses.sort((a: Guess, b: Guess) => a.distance - b.distance);
+      uniqueGuesses.sort((a: GuessInterface, b: GuessInterface) => a.distance - b.distance);
   
       setGuesses(uniqueGuesses);
     } catch (error) {

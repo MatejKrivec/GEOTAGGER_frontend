@@ -1,8 +1,8 @@
-import React, { useDebugValue, useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 import GoogleMapComponent from './GoogleMapComponent';
 import { toast, ToastContainer } from 'react-toastify'; 
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState, AppDispatch } from '../../app/store';
+import { useDispatch } from 'react-redux';
+import {  AppDispatch } from '../../app/store';
 import { addUserPoints } from '../../features/userSlice';
 import Cookies from 'js-cookie';
 

@@ -1,21 +1,15 @@
 //import { Location } from 'aws-sdk'
-import React, { useEffect, useState, useSyncExternalStore } from 'react'
+import  { useEffect, useState } from 'react'
 import Location from '../Location/Location'
 import Guess from '../Guess/Guess'
 import BestGuessLocation from '../Location/BestGuessLocation'
 import { toast, ToastContainer } from 'react-toastify'; 
 import { useGetGuessesByUserIdQuery } from '../../services/api';
 import Cookies from 'js-cookie';
+import LocationInterface from '../../assets/Interfaces/Location';
+import GuessInterface from '../../assets/Interfaces/Guess';
 
 
-interface LocationInterface {
-  id: number,
-  userID: number,
-  name: string,
-  location: string,
-  photo: string,
-  date: Date,
-}
 
 
 const Landing = () => {
@@ -117,15 +111,15 @@ const Landing = () => {
   if (error) return <div>Error loading guesses</div>;
 
 
-  const groupedGuesses: { [key: number]: Guess } = {};
-  guesses?.forEach((guess: Guess) => {
+  const groupedGuesses: { [key: number]: GuessInterface } = {};
+  guesses?.forEach((guess: GuessInterface) => {
     if (!(guess.LocationID in groupedGuesses) || guess.distance < groupedGuesses[guess.LocationID].distance) {
       groupedGuesses[guess.LocationID] = guess;
     }
   });
 
   const uniqueGuesses = Object.values(groupedGuesses);
-  uniqueGuesses.sort((a: Guess, b: Guess) => a.distance - b.distance);
+  uniqueGuesses.sort((a: GuessInterface, b: GuessInterface) => a.distance - b.distance);
 
   ////
 

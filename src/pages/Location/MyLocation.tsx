@@ -1,21 +1,12 @@
-import React from 'react';
 import { PencilIcon, TrashIcon } from '@heroicons/react/16/solid';
 import { toast, ToastContainer } from 'react-toastify'; 
 import Cookies from 'js-cookie';
+import LocationInterface from '../../assets/Interfaces/Location';
 
-
-interface Location {
-  id:       number,
-  userID:   number,
-  name:     String,
-  location: String,
-  photo:    String,
-  date:     Date,
-}
 
 interface LocationProps {
-  EditVisable: (location: Location) => void;
-  location: Location;
+  EditVisable: (location: LocationInterface) => void;
+  location: LocationInterface;
 }
 
 const MyLocation = ({ EditVisable, location }: LocationProps) => {

@@ -1,31 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import UserGuess from './UserGuess';
 import GoogleMapComponent2 from './GoogleMapComponent2';
 import { toast, ToastContainer } from 'react-toastify'; 
 import 'react-toastify/dist/ReactToastify.css'; 
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState, AppDispatch } from '../../app/store';
-import { updateUserPoints, fetchUserPoints } from '../../features/userSlice';
+import { useDispatch } from 'react-redux';
+import {  AppDispatch } from '../../app/store';
+import { updateUserPoints } from '../../features/userSlice';
 import Cookies from 'js-cookie';
+import LocationInterface from '../../assets/Interfaces/Location';
+import GuessInterface from '../../assets/Interfaces/Guess';
 
 
-interface LocationInterface {
-  id: number;
-  userID: number;
-  name: string;
-  location: string;
-  photo: string;
-  date: Date;
-}
 
-interface Guess {
-  id: number;
-  UserID: number;
-  LocationID: number;
-  guessedLocation: string;
-  distance: number;
-  date: Date;
-}
+
 
 const geocodeAddress = async (address: string): Promise<{ lat: number; lng: number } | null> => {
   const apiKey = 'AIzaSyCdwFcRukCF5DwPyaa15dXxX-Ls3Tq55Lo';
@@ -70,7 +57,7 @@ const calculateCrowDistance = (lat1: number, lon1: number, lat2: number, lon2: n
 const Guess = ({ location, onClose}: { location: LocationInterface, onClose: () => void }) => {
   const [errorDistance, setErrorDistance] = useState('');
   const [guessedLocation, setGuessedLocation] = useState('');
-  const [guesses, setGuesses] = useState<Guess[]>([]);
+  const [guesses, setGuesses] = useState<GuessInterface[]>([]);
   const dispatch = useDispatch<AppDispatch>();
   //const { points, status } = useSelector((state: RootState) => state.user);
   
@@ -93,8 +80,8 @@ const Guess = ({ location, onClose}: { location: LocationInterface, onClose: () 
       const data = await response.json();
       
       // Group guesses by UserID
-      const groupedGuesses: { [key: number]: Guess } = {};
-      data.forEach((guess: Guess) => {
+      const groupedGuesses: { [key: number]: GuessInterface } = {};
+      data.forEach((guess: GuessInterface) => {
         if (!(guess.UserID in groupedGuesses) || guess.distance < groupedGuesses[guess.UserID].distance) {
           groupedGuesses[guess.UserID] = guess;
         }
@@ -104,7 +91,7 @@ const Guess = ({ location, onClose}: { location: LocationInterface, onClose: () 
       const uniqueGuesses = Object.values(groupedGuesses);
 
       // Sort unique guesses by UserID
-      uniqueGuesses.sort((a: Guess, b: Guess) => a.distance - b.distance);
+      uniqueGuesses.sort((a: GuessInterface, b: GuessInterface) => a.distance - b.distance);
 
       setGuesses(uniqueGuesses);
     } catch (error) {
@@ -114,9 +101,10 @@ const Guess = ({ location, onClose}: { location: LocationInterface, onClose: () 
   };
 
 
-  const handleLocationSelect = async (address: string, newLocation: any) => {
+  const handleLocationSelect = async (address: string) => {
     const actualLocation = await geocodeAddress(location.location);
     const guessedLocationCoords = await geocodeAddress(address);
+
 
     if (actualLocation && guessedLocationCoords) {
       const distance = calculateCrowDistance(
@@ -136,7 +124,7 @@ const Guess = ({ location, onClose}: { location: LocationInterface, onClose: () 
   };
 
   const handleGuessClick = async () => {
-    handleLocationSelect(guessedLocation, location.location);
+    handleLocationSelect(guessedLocation);
    // setErrorDistance(Distance);
    const token = Cookies.get('token');
   
@@ -194,7 +182,7 @@ const Guess = ({ location, onClose}: { location: LocationInterface, onClose: () 
       errorDistanceInput.value = errorDistance.toString();
       //console.log(errorDistance)
   
-      const newGuess = await postResponse.json();
+     // const newGuess = await postResponse.json();
       //console.log('New guess created:', newGuess);
   
       const countResponse = await fetch(`http://localhost:3000/guesses/count/${userID}/${location.id}`, {
@@ -300,7 +288,5 @@ const Guess = ({ location, onClose}: { location: LocationInterface, onClose: () 
 };
 
 export default Guess;
-function dispatch(arg0: unknown) {
-  throw new Error('Function not implemented.');
-}
+
 

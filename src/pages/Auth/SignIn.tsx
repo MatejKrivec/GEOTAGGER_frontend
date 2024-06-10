@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import '../../assets/styles/AuthPages.css';
 import { Link, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
@@ -6,22 +6,20 @@ import { toast, ToastContainer } from 'react-toastify';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import LoginForm from '../../assets/Interfaces/LogInForm';
 
-// Define the validation schema using Yup
+
+
 const schema = yup.object().shape({
   email: yup.string().email('Invalid email').required('Email is required'),
   password: yup.string().min(1, 'Password must be at least 1 character').required('Password is required'),
 });
 
-interface IFormInputs {
-  email: string;
-  password: string;
-}
 
 const SignIn = () => {
   const navigate = useNavigate();
 
-  const { register, handleSubmit, formState: { errors } } = useForm<IFormInputs>({
+  const { register, handleSubmit, formState: { errors } } = useForm<LoginForm>({
     resolver: yupResolver(schema),
   });
 
@@ -79,7 +77,7 @@ const SignIn = () => {
     handleToken();
   }, [navigate]);
 
-  const onSubmit: SubmitHandler<IFormInputs> = async (data) => {
+  const onSubmit: SubmitHandler<LoginForm> = async (data) => {
     try {
       const response = await fetch('http://localhost:3000/auth/login', {
         method: 'POST',

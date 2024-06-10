@@ -1,13 +1,5 @@
-import React from 'react'
+import LocationInterface from "../../assets/Interfaces/Location"
 
-interface LocationInterface {
-    id: number,
-    userID: number,
-    name: String,
-    location: String,
-    photo: String,
-    date: Date,
-  }
   
 
 const Location = ({location, onClick}: {location: LocationInterface | null, onClick: () => void}) => {

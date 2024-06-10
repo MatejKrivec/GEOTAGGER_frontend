@@ -1,9 +1,9 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import SignUpForm from '../../assets/Interfaces/SignUpForm';
 
 // Define the validation schema using Yup
 const schema = yup.object().shape({
@@ -16,20 +16,14 @@ const schema = yup.object().shape({
     .required('Repeat password is required')
 });
 
-interface IFormInputs {
-  email: string;
-  firstname: string;
-  surname: string;
-  password: string;
-  repeatPassword: string;
-}
+
 
 const SignUp = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm<IFormInputs>({
+  const { register, handleSubmit, formState: { errors } } = useForm<SignUpForm>({
     resolver: yupResolver(schema),
   });
 
-  const onSubmit: SubmitHandler<IFormInputs> = async (data) => {
+  const onSubmit: SubmitHandler<SignUpForm> = async (data) => {
     const username = `${data.firstname} ${data.surname}`;
 
     try {

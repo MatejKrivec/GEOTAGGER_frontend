@@ -1,28 +1,10 @@
-import React, { useEffect, useState } from 'react'
 import { toast, ToastContainer } from 'react-toastify'; 
 import { useGetLocationByIdQuery } from '../../services/api';
+import GuessInterface from '../../assets/Interfaces/Guess';
 
-interface Guess {
-    id: number;
-    UserID: number;
-    LocationID: number;
-    guessedLocation: string;
-    distance: number;
-    date: Date;
-  }
 
-  interface LocationInterface {
-    id: number;
-    userID: number;
-    name: string;
-    location: string;
-    photo: string;
-    date: Date;
-  }
 
-  
-
-const BestGuessLocation = ({guess}: {guess: Guess}) => {
+const BestGuessLocation = ({guess}: {guess: GuessInterface }) => {
 
     //Tole je blo pred RTK Query
    /* const[location, setLocation] = useState<LocationInterface>();

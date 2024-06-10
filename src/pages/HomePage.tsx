@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import ChangeEmailUsername from './ProfileSettings/ChangeEmailUsername';
 import Landing from './Home/Landing';
 import Logout from './ProfileSettings/Logout';
 import Profile from './Home/Profile';
-import AdminHomePage from './AdminHomePage'; // Import AdminHomePage component
 import '../assets/styles/HomePage.css';
 import Cookies from 'js-cookie';
 import { toast, ToastContainer } from 'react-toastify';
-import { AppDispatch, RootState } from '../app/store';
+import { AppDispatch } from '../app/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserPoints, selectUserPoints, selectUserStatus } from '../features/userSlice';
 import { useError } from './Error/ErrorContext';
@@ -87,7 +86,6 @@ const HomePage = () => {
       const userData = await response.json();
 
       const userId = userData.id;
-      const profilePicture = userData.profilePic;
 
       const data = await fetch(`http://localhost:3000/users/${userId}`, {
         method: 'GET',

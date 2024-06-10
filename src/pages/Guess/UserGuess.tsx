@@ -1,27 +1,15 @@
-import React, { useEffect, useState } from 'react'
-import { toast, ToastContainer } from 'react-toastify'; 
+import { useEffect, useState } from 'react'
+import { ToastContainer } from 'react-toastify'; 
 import Cookies from 'js-cookie';
+import UserInterface from '../../assets/Interfaces/User';
+import GuessInterface from '../../assets/Interfaces/Guess';
 
-interface Guess {
-    id: number;
-    UserID: number;
-    LocationID: number;
-    guessedLocation: string;
-    distance: number;
-    date: Date;
-  }
 
-  interface User {
-    id: number;
-    username: string;
-    email: string;
-    password?: string;
-    profilePic?: string;
-    points: number;
-  }
 
-const UserGuess = ({ guess, index }: { guess: Guess; index: number }) => {
-    const [user, setUser] = useState<User>()
+
+
+const UserGuess = ({ guess, index }: { guess: GuessInterface; index: number }) => {
+    const [user, setUser] = useState<UserInterface>()
 
     useEffect(() => {
         const fetchUserData = async() => {
@@ -51,22 +39,22 @@ const UserGuess = ({ guess, index }: { guess: Guess; index: number }) => {
 
     let backgroundColor = '';
     if (index === 0) {
-      backgroundColor = 'bg-yellow-400'; // First place
+      backgroundColor = 'bg-yellow-400'; 
     } else if (index === 1) {
-      backgroundColor = 'bg-gray-400'; // Second place
+      backgroundColor = 'bg-gray-400'; 
     } else if (index === 2) {
-      backgroundColor = ' bg-yellow-600'; // Third place
+      backgroundColor = ' bg-yellow-600'; 
     } else   {
-      backgroundColor = 'bg-gray-600'; // Dark gray for positions 4-6
+      backgroundColor = 'bg-gray-600'; 
     } 
 
     const userID = localStorage.getItem('UserId');
-    let background = ''; // Initialize background variable
+    let background = ''; 
     let distancetextcolour = 'text-green-400';
     let textcolour = '';
 
     if (userID !== null) {
-      const userIdNumber = parseInt(userID, 10); // Convert to number
+      const userIdNumber = parseInt(userID, 10); 
       if (userIdNumber === guess.UserID) {
         background = 'bg-green-300';
         distancetextcolour = 'text-white';

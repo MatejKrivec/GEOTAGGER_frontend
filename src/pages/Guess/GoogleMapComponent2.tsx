@@ -22,8 +22,10 @@ const GoogleMapComponent = ({ onLocationSelect }: { onLocationSelect: (address: 
     libraries
   });
 
-  const [map, setMap] = useState<google.maps.Map | null>(null);
+  const [, setMap] = useState<google.maps.Map | null>(null);
   const [markerPosition, setMarkerPosition] = useState(center);
+
+  //console.log("The map "+map)
 
   const onMapClick = useCallback((event: google.maps.MapMouseEvent) => {
     const lat = event.latLng?.lat();

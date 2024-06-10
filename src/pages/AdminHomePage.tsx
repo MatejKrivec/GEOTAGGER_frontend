@@ -5,21 +5,9 @@ import { MagnifyingGlassIcon } from '@heroicons/react/16/solid';
 import { toast, ToastContainer } from 'react-toastify';
 import ActivityLogItem from './UserActivity/ActivityLogItem';
 import Cookies from 'js-cookie';
+import Activity from '../assets/Interfaces/Activity';
 
-interface User {
-  username: string;
-  profilePic: string;
-}
 
-interface Activity {
-  id: number;
-  userId: number;
-  action: string;
-  componentType: string;
-  newValue: string;
-  location: string;
-  createdAt: string;
-}
 
 const AdminHomePage: React.FC = () => {
   const [showSettingsPopup, setShowSettingsPopup] = useState(false);
