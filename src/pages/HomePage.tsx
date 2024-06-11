@@ -10,6 +10,8 @@ import { AppDispatch } from '../app/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserPoints, selectUserPoints, selectUserStatus } from '../features/userSlice';
 import { useError } from './Error/ErrorContext';
+import logoImage from  '../assets/images/geotagger_logo.png';
+
 
 const HomePage = () => {
 
@@ -212,7 +214,7 @@ const HomePage = () => {
         <div className="main m-5">
           <div className="headerContainer flex justify-between items-center">
             <div className="logoContainer">
-              <img src="src/assets/images/geotagger_logo.PNG" alt="logo" />
+              <img src={logoImage} alt="logo" />
             </div>
             <div className="SignIN-SignUP-container flex items-center md:justify-between justify-end">
               <div className="hidden md:flex order-2 md:order-1">

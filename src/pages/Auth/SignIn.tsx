@@ -8,6 +8,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import LoginForm from '../../assets/Interfaces/LogInForm';
 
+import logoImage from  '../../assets/images/geotagger_logo.png';
+import mapDecorationImage from '../../assets/images/image 1.png'
+import GoogleLogo from '../../assets/images/google-logo.jpg'
+import fbLogo from '../../assets/images/fb_logo.png'
+
 
 
 const schema = yup.object().shape({
@@ -152,7 +157,7 @@ const SignIn = () => {
     <div className='flex flex-col md:flex-row w-full'>
       <div className='w-full md:w-[45%] mt-10 px-4'>
         <div className='flex flex-col justify-center items-center mb-5'>
-          <img src="src/assets/images/geotagger_logo.PNG" alt="logo" className="w-32 h-auto mr-[21rem] mb-20" />
+          <img src={logoImage} alt="logo" className="w-32 h-auto mr-[21rem] mb-20" />
           <h1 className='text-4xl mb-2'>Sign in</h1>
           <p className='text-center'>Welcome back to Geotagger. We are glad that you are back.</p>
         </div>
@@ -177,11 +182,11 @@ const SignIn = () => {
           </form>
           <div className='flex flex-col w-full max-w-md'>
             <button className='border text-black font-bold py-2 px-4 mb-2 w-full rounded-xl flex justify-center items-center' onClick={handleGoogleLogin}>
-              <img src="src/assets/images/google-logo.jpg" alt="googleLogo" className='w-8 bg-transparent mr-2' />
+              <img src={GoogleLogo} alt="googleLogo" className='w-8 bg-transparent mr-2' />
               Sign in with Google
             </button>
             <button className='bg-blue-400 text-white font-bold py-2 px-4 mb-2 w-full rounded-xl flex justify-center items-center'>
-              <img src="src/assets/images/fb_logo.png" alt="fbLogo" className='w-8 mr-2' />
+              <img src={fbLogo} alt="fbLogo" className='w-8 mr-2' />
               Sign in with Facebook
             </button>
             <div className="flex justify-between">
@@ -192,7 +197,7 @@ const SignIn = () => {
         </div>
       </div>
       <div className='hidden md:block w-full md:w-[55%]'>
-        <img src="src/assets/images/image 1.png" alt="mapImg" className="w-full h-full object-cover" />
+        <img src={mapDecorationImage} alt="mapImg" className="w-full h-full object-cover" />
       </div>
       <ToastContainer />
     </div>

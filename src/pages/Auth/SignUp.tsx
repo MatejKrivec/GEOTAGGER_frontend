@@ -4,6 +4,9 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import SignUpForm from '../../assets/Interfaces/SignUpForm';
+import logoImage from  '../../assets/images/geotagger_logo.png';
+import defaultUserPic from '../../assets/images/default_user_pic.jpg'
+import mapDecorationImage from '../../assets/images/image 1.png'
 
 // Define the validation schema using Yup
 const schema = yup.object().shape({
@@ -54,10 +57,10 @@ const SignUp = () => {
     <div className='flex flex-col md:flex-row w-full'>
       <div className='w-full md:w-[45%] mt-10 px-4'>
         <div className='flex flex-col justify-center items-center mb-5'>
-          <img src="src/assets/images/geotagger_logo.PNG" alt="logo" className="w-32 h-auto mr-[21rem] mb-20" />
+          <img src={logoImage} alt="logo" className="w-32 h-auto mr-[21rem] mb-20" />
           <h1 className='text-4xl mb-2'>Sign up</h1>
           <p className='text-center mb-2'>Your name will appear on posts and your public profile.</p>
-          <img src="src/assets/images/default_user_pic.jpg" alt="DefaultUserPic" className='w-[4rem] rounded-full' />
+          <img src={defaultUserPic} alt="DefaultUserPic" className='w-[4rem] rounded-full' />
         </div>
         <div className='flex justify-center'>
           <form className='flex flex-col w-full max-w-md' onSubmit={handleSubmit(onSubmit)}>
@@ -121,7 +124,7 @@ const SignUp = () => {
         </div>
       </div>
       <div className='hidden md:block w-full md:w-[55%]'>
-        <img src="src/assets/images/image 1.png" alt="mapImg" className="w-full h-full object-cover" />
+        <img src={mapDecorationImage} alt="mapImg" className="w-full h-full object-cover" />
       </div>
       <ToastContainer />
     </div>

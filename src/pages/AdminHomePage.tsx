@@ -6,6 +6,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import ActivityLogItem from './UserActivity/ActivityLogItem';
 import Cookies from 'js-cookie';
 import Activity from '../assets/Interfaces/Activity';
+import logoImage from  '../assets/images/geotagger_logo.png';
 
 
 
@@ -111,7 +112,7 @@ const AdminHomePage: React.FC = () => {
       <div className="main m-5">
         <div className="headerContainer flex justify-between items-center">
           <div className="logoContainer">
-            <img src="src/assets/images/geotagger_logo.PNG" alt="logo" />
+            <img src={logoImage} alt="logo" />
           </div>
           <div className="Header-container flex items-center">
             <button

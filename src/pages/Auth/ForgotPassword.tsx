@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import emailjs from 'emailjs-com';
 import { toast, ToastContainer } from 'react-toastify';
 
+import logoImage from  '../../assets/images/geotagger_logo.png';
+import mapDecorationImage from '../../assets/images/image 1.png'
+
 
 const ForgotPassword = () => {
     const [Email, setEmail] = useState('');
@@ -62,7 +65,7 @@ const ForgotPassword = () => {
     <div className='flex flex-col md:flex-row w-full'>
     <div className='w-full md:w-[45%] mt-10 px-4'>
       <div className='flex flex-col justify-center items-center mb-5'>
-        <img src="src/assets/images/geotagger_logo.PNG" alt="logo" className="w-32 h-auto mr-[21rem] mb-20" />
+        <img src={logoImage} alt="logo" className="w-32 h-auto mr-[21rem] mb-20" />
         <h1 className='text-4xl mb-2'>Forgot password</h1>
         <p className='text-center'>Enter your account email and press send.</p>
         <p className='text-center'>Then a password reset token will be sent to you.</p>
@@ -79,7 +82,7 @@ const ForgotPassword = () => {
       </div>
     </div>
     <div className='hidden md:block w-full md:w-[55%]'>
-      <img src="src/assets/images/image 1.png" alt="mapImg" className="w-full h-full object-cover" />
+      <img src={mapDecorationImage} alt="mapImg" className="w-full h-full object-cover" />
     </div>
     <ToastContainer />
   </div>
