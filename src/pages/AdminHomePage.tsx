@@ -6,7 +6,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import ActivityLogItem from './UserActivity/ActivityLogItem';
 import Cookies from 'js-cookie';
 import Activity from '../assets/Interfaces/Activity';
-import logoPic from  '../assets/images/geotagger_logo.png';
+//import logoPic from  '../assets/images/geotagger_logo.png';
 
 
 

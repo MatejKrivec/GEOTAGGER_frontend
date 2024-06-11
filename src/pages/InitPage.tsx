@@ -1,7 +1,7 @@
 import '../assets/styles/InitPage.css';
 import { useNavigate } from 'react-router-dom';
 import mapImage from '../assets/images/background-world-map 1.png';
-import logoImagee from  '../assets/images/geotagger_logo.png';
+//import logoImagee from  '../assets/images/geotagger_logo.png';
 import PresentationImage from '../assets/images/lockedP_image.png'
 
 const InitPage = () => {

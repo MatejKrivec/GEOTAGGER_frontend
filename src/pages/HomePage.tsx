@@ -10,7 +10,7 @@ import { AppDispatch } from '../app/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserPoints, selectUserPoints, selectUserStatus } from '../features/userSlice';
 import { useError } from './Error/ErrorContext';
-import geotaggerLogo from  '../assets/images/geotagger_logo.png';
+//import geotaggerLogo from  '../assets/images/geotagger_logo.png';
 
 
 const HomePage = () => {
