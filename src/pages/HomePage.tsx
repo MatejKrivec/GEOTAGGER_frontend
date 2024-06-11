@@ -103,6 +103,7 @@ const HomePage = () => {
 
       setProfilePic(user.profilePic)
       localStorage.setItem('UserId', userId);
+      
 
       dispatch(fetchUserPoints(userId));
       

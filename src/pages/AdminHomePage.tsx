@@ -23,6 +23,49 @@ const AdminHomePage: React.FC = () => {
     const token = Cookies.get('token');
 
     try {
+      const response = await fetch('http://localhost:3000/decode', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          token: token
+        })
+      });
+
+      if (!response.ok) {
+        toast.error('Failed to decode token');
+        throw new Error('Failed to decode token');
+        
+      }
+
+      const userData = await response.json();
+
+      const userId = userData.id;
+
+      const data = await fetch(`http://localhost:3000/users/${userId}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      })
+      const user = await data.json()
+
+      if (!data.ok) {
+        toast.error('Failed to decode token');
+        throw new Error('Failed to decode token');
+      }
+
+      localStorage.setItem('UserId', userId);
+    }
+    catch (error) {
+      console.error('Error sering user data:', error);
+      toast.error('Error sering user data');
+    }
+
+
+    try {
       const response = await fetch('http://localhost:3000/user-activity/latest', {
         method: 'GET',
         headers: {
