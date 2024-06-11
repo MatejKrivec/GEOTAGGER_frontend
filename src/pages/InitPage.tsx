@@ -1,7 +1,7 @@
 import '../assets/styles/InitPage.css';
 import { useNavigate } from 'react-router-dom';
 import mapImage from '../assets/images/background-world-map 1.png';
-import logoImage from  '../assets/images/geotagger_logo.png';
+import logoImagee from  '../assets/images/geotagger_logo.png';
 import PresentationImage from '../assets/images/lockedP_image.png'
 
 const InitPage = () => {
@@ -20,7 +20,7 @@ const InitPage = () => {
           <div className='Content mx-4 md:mx-10 mt-5'>
             <div className="headerContainer mb-10 flex flex-col md:flex-row items-center justify-between">
               <div className='logoContainer mb-4 md:mb-0'>
-                <img src={logoImage} alt="logo" />
+                <img src={logoImagee} alt="logo" />
               </div>
               <div className='SignIN-SignUP-container flex items-center'>
                 <button className='hover:bg-green-400 hover:text-white text-black font-bold py-2 px-4 rounded mr-2' onClick={SignInClick}>Sign in</button>
