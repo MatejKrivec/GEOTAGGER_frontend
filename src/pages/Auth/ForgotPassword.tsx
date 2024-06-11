@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import emailjs from 'emailjs-com';
 import { toast, ToastContainer } from 'react-toastify';
 
-//import logoImage from  '../../assets/images/geotagger_logo.png';
+import geotaggerLogo from  '../../assets/images/geotaggerLogo.jpg';
 import mapDecorationImage from '../../assets/images/image 1.png'
 
 
@@ -65,7 +65,7 @@ const ForgotPassword = () => {
     <div className='flex flex-col md:flex-row w-full'>
     <div className='w-full md:w-[45%] mt-10 px-4'>
       <div className='flex flex-col justify-center items-center mb-5'>
-        <img src='../../assets/images/geotagger_logo.png' alt="logo" className="w-32 h-auto mr-[21rem] mb-20" />
+        <img src={geotaggerLogo} alt="logo" className="w-32 h-auto mr-[21rem] mb-20" />
         <h1 className='text-4xl mb-2'>Forgot password</h1>
         <p className='text-center'>Enter your account email and press send.</p>
         <p className='text-center'>Then a password reset token will be sent to you.</p>

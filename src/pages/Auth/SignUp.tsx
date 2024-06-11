@@ -4,7 +4,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import SignUpForm from '../../assets/Interfaces/SignUpForm';
-//import logoImage from  '../../assets/images/geotagger_logo.png';
+import geotaggerLogo from  '../../assets/images/geotaggerLogo.jpg';
 import defaultUserPic from '../../assets/images/default_user_pic.jpg'
 import mapDecorationImage from '../../assets/images/image 1.png'
 
@@ -57,7 +57,7 @@ const SignUp = () => {
     <div className='flex flex-col md:flex-row w-full'>
       <div className='w-full md:w-[45%] mt-10 px-4'>
         <div className='flex flex-col justify-center items-center mb-5'>
-          <img src='../../assets/images/geotagger_logo.png' alt="logo" className="w-32 h-auto mr-[21rem] mb-20" />
+          <img src={geotaggerLogo} alt="logo" className="w-32 h-auto mr-[21rem] mb-20" />
           <h1 className='text-4xl mb-2'>Sign up</h1>
           <p className='text-center mb-2'>Your name will appear on posts and your public profile.</p>
           <img src={defaultUserPic} alt="DefaultUserPic" className='w-[4rem] rounded-full' />
