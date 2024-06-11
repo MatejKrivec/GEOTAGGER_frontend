@@ -50,7 +50,7 @@ const AdminHomePage: React.FC = () => {
           'Authorization': `Bearer ${token}`
         }
       })
-      const user = await data.json()
+      //const user = await data.json()
 
       if (!data.ok) {
         toast.error('Failed to decode token');
