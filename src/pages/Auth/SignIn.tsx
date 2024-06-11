@@ -8,7 +8,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import LoginForm from '../../assets/Interfaces/LogInForm';
 
-import logoImage from  '../../assets/images/geotagger_logo.png';
+//import logoImage from  '../../assets/images/geotagger_logo.png';
 import mapDecorationImage from '../../assets/images/image 1.png'
 import GoogleLogo from '../../assets/images/google-logo.jpg'
 import fbLogo from '../../assets/images/fb_logo.png'
@@ -157,7 +157,7 @@ const SignIn = () => {
     <div className='flex flex-col md:flex-row w-full'>
       <div className='w-full md:w-[45%] mt-10 px-4'>
         <div className='flex flex-col justify-center items-center mb-5'>
-          <img src={logoImage} alt="logo" className="w-32 h-auto mr-[21rem] mb-20" />
+          <img src='../../assets/images/geotagger_logo.png' alt="logo" className="w-32 h-auto mr-[21rem] mb-20" />
           <h1 className='text-4xl mb-2'>Sign in</h1>
           <p className='text-center'>Welcome back to Geotagger. We are glad that you are back.</p>
         </div>
