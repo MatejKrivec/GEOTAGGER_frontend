@@ -1,5 +1,6 @@
 import '../assets/styles/InitPage.css';
 import { useNavigate } from 'react-router-dom';
+import mapImage from 'src\assets\images\background-world-map 1.png';
 
 const InitPage = () => {
 
@@ -36,7 +37,7 @@ const InitPage = () => {
             </div>
               <div className='w-full md:w-3/4 flex justify-center md:justify-end'>
                 <div className='ImageContainer'>
-                  <img src="src/assets/images/background-world-map 1.png" alt="map image" className='w-full'/>
+                  <img src={mapImage} alt="map image" className='w-full'/>
                 </div>
               </div>
             </div>
