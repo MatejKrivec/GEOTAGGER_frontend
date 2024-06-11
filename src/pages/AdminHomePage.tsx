@@ -112,7 +112,7 @@ const AdminHomePage: React.FC = () => {
       <div className="main m-5">
         <div className="headerContainer flex justify-between items-center">
           <div className="logoContainer">
-            <img src={logoPic} alt="logo" />
+            <img src='src/assets/images/geotagger_logo.png' alt="logo" />
           </div>
           <div className="Header-container flex items-center">
             <button

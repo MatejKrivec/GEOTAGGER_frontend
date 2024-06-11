@@ -214,7 +214,7 @@ const HomePage = () => {
         <div className="main m-5">
           <div className="headerContainer flex justify-between items-center">
             <div className="logoContainer">
-              <img src={geotaggerLogo} alt="logo" />
+              <img src='src/assets/images/geotagger_logo.png' alt="logo" />
             </div>
             <div className="SignIN-SignUP-container flex items-center md:justify-between justify-end">
               <div className="hidden md:flex order-2 md:order-1">
