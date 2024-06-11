@@ -1,6 +1,6 @@
 import '../assets/styles/InitPage.css';
 import { useNavigate } from 'react-router-dom';
-import mapImage from 'src\assets\images\background-world-map 1.png';
+import mapImage from '../assets/images/background-world-map 1.png';
 
 const InitPage = () => {
 
