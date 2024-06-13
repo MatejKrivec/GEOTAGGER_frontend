@@ -98,7 +98,7 @@
   <img width="12" />
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prisma/prisma-original-wordmark.svg" height="40" alt="prisma logo" />
   <img width="12" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jsonwebtoken/jsonwebtoken-plain.svg" height="40" alt="jwt logo" />
+ <img src="https://jwt.io/img/logo-asset.svg" height="40" alt="jwt logo" />
   <img width="12" />
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swagger/swagger-original-wordmark.svg" height="40" alt="swagger logo" />
   <img width="12" />
@@ -106,7 +106,7 @@
   <img width="12" />
   <img src="https://raw.githubusercontent.com/reduxjs/redux-toolkit/master/logo/logo.svg" height="40" alt="redux toolkit logo" />
   <img width="12" />
-  <img src="https://raw.githubusercontent.com/reduxjs/redux-toolkit/master/logo/logo.svg" height="40" alt="rtk query logo" />
+   <img src="https://raw.githubusercontent.com/reduxjs/redux-toolkit/master/logo/logo.svg" height="40" alt="rtk query logo" />
 </div>
 
 ###
