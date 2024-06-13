@@ -106,7 +106,8 @@
   <img width="12" />
   <img src="https://raw.githubusercontent.com/reduxjs/redux-toolkit/master/logo/logo.svg" height="40" alt="redux toolkit logo" />
   <img width="12" />
-   <img src="https://raw.githubusercontent.com/reduxjs/redux-toolkit/master/logo/logo.svg" height="40" alt="rtk query logo" />
+  <!-- RTK Query uses the same logo as Redux Toolkit -->
+  <img src="https://raw.githubusercontent.com/reduxjs/redux-toolkit/master/logo/logo.svg" height="40" alt="rtk query logo" />
 </div>
 
 ###
