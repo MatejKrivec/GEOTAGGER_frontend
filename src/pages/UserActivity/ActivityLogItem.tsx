@@ -16,7 +16,7 @@ const ActivityLogItem = ({ activity }: {activity: Activity}) => {
     const fetchUser = async () => {
       const token = Cookies.get('token');
       try {
-        const response = await fetch(`http://localhost:3000/users/${activity.userId}`, {
+        const response = await fetch(`https://geotagger.adaptable.app/users/${activity.userId}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

@@ -24,7 +24,7 @@ const AdminHomePage: React.FC = () => {
     const token = Cookies.get('token');
 
     try {
-      const response = await fetch('http://localhost:3000/decode', {
+      const response = await fetch('https://geotagger.adaptable.app/decode', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -44,7 +44,7 @@ const AdminHomePage: React.FC = () => {
 
       const userId = userData.id;
 
-      const data = await fetch(`http://localhost:3000/users/${userId}`, {
+      const data = await fetch(`https://geotagger.adaptable.app/users/${userId}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -67,7 +67,7 @@ const AdminHomePage: React.FC = () => {
 
 
     try {
-      const response = await fetch('http://localhost:3000/user-activity/latest', {
+      const response = await fetch('https://geotagger.adaptable.app/user-activity/latest', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

@@ -34,7 +34,7 @@ const SignIn = () => {
       const token = urlParams.get('token');
 
       if (token !== null) {
-        const valid = await fetch('http://localhost:3000/auth/verify-token', {
+        const valid = await fetch('https://geotagger.adaptable.app/auth/verify-token', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -56,7 +56,7 @@ const SignIn = () => {
         });
 
         try {
-          const response = await fetch('http://localhost:3000/auth/protected', {
+          const response = await fetch('https://geotagger.adaptable.app/auth/protected', {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
@@ -84,7 +84,7 @@ const SignIn = () => {
 
   const onSubmit: SubmitHandler<LoginForm> = async (data) => {
     try {
-      const response = await fetch('http://localhost:3000/auth/login', {
+      const response = await fetch('https://geotagger.adaptable.app/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -98,7 +98,7 @@ const SignIn = () => {
 
       const { token } = await response.json();
 
-      const verifyResponse = await fetch('http://localhost:3000/auth/verify-token', {
+      const verifyResponse = await fetch('https://geotagger.adaptable.app/auth/verify-token', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -120,7 +120,7 @@ const SignIn = () => {
       });
 
       try {
-        const response = await fetch('http://localhost:3000/auth/protected', {
+        const response = await fetch('https://geotagger.adaptable.app/auth/protected', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
