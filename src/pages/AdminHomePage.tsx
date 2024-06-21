@@ -9,6 +9,9 @@ import Activity from '../assets/Interfaces/Activity';
 import geotaggerLogo from  '../assets/images/geotaggerLogo.jpg';
 
 
+//test za upload da se amplify updejta
+
+
 
 const AdminHomePage: React.FC = () => {
   const [showSettingsPopup, setShowSettingsPopup] = useState(false);
