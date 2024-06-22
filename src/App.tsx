@@ -49,7 +49,7 @@ function RouteGuard() {
       }
 
       try {
-        const response = await fetch('http://localhost:3000/decode', {
+        const response = await fetch('https://geotagger.adaptable.app/decode', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -64,7 +64,7 @@ function RouteGuard() {
         const userData = await response.json();
         const userId = userData.id;
 
-        const userResponse = await fetch(`http://localhost:3000/users/${userId}`, {
+        const userResponse = await fetch(`https://geotagger.adaptable.app/users/${userId}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
