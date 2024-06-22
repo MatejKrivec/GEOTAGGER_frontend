@@ -43,7 +43,7 @@ const Landing = () => {
     const token = Cookies.get('token');
 
     try {
-      const LocationsData = await fetch(`http://localhost:3000/locations/other/${userID}`, {
+      const LocationsData = await fetch(`https://geotagger.adaptable.app/locations/other/${userID}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

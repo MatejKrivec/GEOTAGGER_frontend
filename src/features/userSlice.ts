@@ -18,7 +18,7 @@ const initialState: UserState = {
 
 export const fetchUserPoints = createAsyncThunk('user/fetchUserPoints', async (userId: string) => {
   const token = Cookies.get('token');
-  const response = await axios.get(`http://localhost:3000/users/${userId}`, {
+  const response = await axios.get(`https://geotagger.adaptable.app/users/${userId}`, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`,
@@ -29,7 +29,7 @@ export const fetchUserPoints = createAsyncThunk('user/fetchUserPoints', async (u
 
 export const updateUserPoints = createAsyncThunk('user/updateUserPoints', async ({ userId, points }: { userId: string; points: number }) => {
   const token = Cookies.get('token');
-  const response = await axios.patch(`http://localhost:3000/users/updateUserPoints/${userId}`, 
+  const response = await axios.patch(`https://geotagger.adaptable.app/users/updateUserPoints/${userId}`, 
   { points }, 
   {
     headers: {
@@ -42,7 +42,7 @@ export const updateUserPoints = createAsyncThunk('user/updateUserPoints', async 
 
 export const addUserPoints = createAsyncThunk('user/addUserPoints', async ({ userId, points }: { userId: string; points: number }) => {
   const token = Cookies.get('token');
-  const response = await axios.patch(`http://localhost:3000/users/addUserPoints/${userId}`, 
+  const response = await axios.patch(`https://geotagger.adaptable.app/users/addUserPoints/${userId}`, 
   { points }, 
   {
     headers: {

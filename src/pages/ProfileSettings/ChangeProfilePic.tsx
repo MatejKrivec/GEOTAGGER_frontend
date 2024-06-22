@@ -17,7 +17,7 @@ const ChangeProfilePic = ({ onClose, onConfirmClose }: { onClose: () => void; on
     
     try {
       const userId = localStorage.getItem('UserId');
-      const data = await fetch(`http://localhost:3000/users/${userId}`, {
+      const data = await fetch(`https://geotagger.adaptable.app/users/${userId}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -56,7 +56,7 @@ const ChangeProfilePic = ({ onClose, onConfirmClose }: { onClose: () => void; on
 
       
   
-      const response = await fetch('http://localhost:3000/aws/upload-profile-pic', {
+      const response = await fetch('https://geotagger.adaptable.app/aws/upload-profile-pic', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -76,7 +76,7 @@ const ChangeProfilePic = ({ onClose, onConfirmClose }: { onClose: () => void; on
 
 
     const userId = localStorage.getItem('UserId');
-    const patchResponse = await fetch(`http://localhost:3000/users/${userId}`, {
+    const patchResponse = await fetch(`https://geotagger.adaptable.app/users/${userId}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',

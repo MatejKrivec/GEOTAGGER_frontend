@@ -73,7 +73,7 @@ const Guess = ({ location, onClose}: { location: LocationInterface, onClose: () 
 
   const fetchGuesses = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/guesses/location/${location.id}`);
+      const response = await fetch(`https://geotagger.adaptable.app/guesses/location/${location.id}`);
       if (!response.ok) {
         throw new Error('Error fetching guesses');
       }
@@ -138,7 +138,7 @@ const Guess = ({ location, onClose}: { location: LocationInterface, onClose: () 
       }
 
       
-      const userResponse = await fetch(`http://localhost:3000/users/${userID}`, {
+      const userResponse = await fetch(`https://geotagger.adaptable.app/users/${userID}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -159,7 +159,7 @@ const Guess = ({ location, onClose}: { location: LocationInterface, onClose: () 
       }
 
 
-      const postResponse = await fetch(`http://localhost:3000/guesses`, {
+      const postResponse = await fetch(`https://geotagger.adaptable.app/guesses`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -185,7 +185,7 @@ const Guess = ({ location, onClose}: { location: LocationInterface, onClose: () 
      // const newGuess = await postResponse.json();
       //console.log('New guess created:', newGuess);
   
-      const countResponse = await fetch(`http://localhost:3000/guesses/count/${userID}/${location.id}`, {
+      const countResponse = await fetch(`https://geotagger.adaptable.app/guesses/count/${userID}/${location.id}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

@@ -21,7 +21,7 @@ const ChangeEmapilUsername = ({onClose,onCloseClick}: {onClose: () => void,onClo
 
         const setFormData = async () => {
             const userId = localStorage.getItem('UserId')
-            const response = await fetch(`http://localhost:3000/users/${userId}`, {
+            const response = await fetch(`https://geotagger.adaptable.app/users/${userId}`, {
               method: 'GET',
               headers: {
                 'Content-Type': 'application/json',
@@ -60,7 +60,7 @@ const ChangeEmapilUsername = ({onClose,onCloseClick}: {onClose: () => void,onClo
             };
 
 
-            const response = await fetch(`http://localhost:3000/users/${userId}`, {
+            const response = await fetch(`https://geotagger.adaptable.app/users/${userId}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',

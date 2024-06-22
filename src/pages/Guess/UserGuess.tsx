@@ -16,7 +16,7 @@ const UserGuess = ({ guess, index }: { guess: GuessInterface; index: number }) =
 
           const token = Cookies.get('token');
             try {
-                const userData = await fetch(`http://localhost:3000/users/${guess.UserID}`, {
+                const userData = await fetch(`https://geotagger.adaptable.app/users/${guess.UserID}`, {
                   method: 'GET',
                   headers: {
                     'Content-Type': 'application/json',

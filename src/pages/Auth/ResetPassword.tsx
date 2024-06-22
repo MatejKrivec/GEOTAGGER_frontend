@@ -34,7 +34,7 @@ const ResetPassword = () => {
         }
 
       // Validate token
-      const response = await fetch('http://localhost:3000/ResetPassword/validate-token', {
+      const response = await fetch('https://geotagger.adaptable.app/ResetPassword/validate-token', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

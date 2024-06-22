@@ -150,7 +150,7 @@ const SignIn = () => {
   };
 
   const handleGoogleLogin = () => {
-    window.location.href = 'http://localhost:3000/Oauth/google';
+    window.location.href = 'https://geotagger.adaptable.app/Oauth/google';
   };
 
   return (

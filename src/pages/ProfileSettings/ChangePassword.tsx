@@ -46,7 +46,7 @@ const ChangePassword = ({onClose, onConfirmClose}: {onClose: () => void; onConfi
       else{
         const userId = localStorage.getItem('UserId');
 
-        const response = await fetch(`http://localhost:3000/users/validatePassword/${userId}`, {
+        const response = await fetch(`https://geotagger.adaptable.app/users/validatePassword/${userId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -67,7 +67,7 @@ const ChangePassword = ({onClose, onConfirmClose}: {onClose: () => void; onConfi
 
 
         const newPassword = formData.newPassword;
-        const update = await fetch(`http://localhost:3000/users/updatePassword/${userId}`, {
+        const update = await fetch(`https://geotagger.adaptable.app/users/updatePassword/${userId}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',

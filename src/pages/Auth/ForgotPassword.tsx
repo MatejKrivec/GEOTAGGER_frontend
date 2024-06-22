@@ -20,7 +20,7 @@ const ForgotPassword = () => {
 
         console.log("email!!!!!!!!!!! " + Email)
         try {
-            const response = await fetch('http://localhost:3000/ResetPassword/request', {
+            const response = await fetch('https://geotagger.adaptable.app/ResetPassword/request', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',

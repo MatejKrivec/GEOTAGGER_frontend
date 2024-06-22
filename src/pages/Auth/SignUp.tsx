@@ -30,7 +30,7 @@ const SignUp = () => {
     const username = `${data.firstname} ${data.surname}`;
 
     try {
-      const response = await fetch('http://localhost:3000/users', {
+      const response = await fetch('https://geotagger.adaptable.app/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

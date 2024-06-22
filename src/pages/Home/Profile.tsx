@@ -58,7 +58,7 @@ const Profile = ({profilePic}:{profilePic: string}) => {
     const token = Cookies.get('token');
     const id = localStorage.getItem('UserId');
     try {
-      const response = await fetch(`http://localhost:3000/guesses/user/${id}`,{
+      const response = await fetch(`https://geotagger.adaptable.app/guesses/user/${id}`,{
         method: 'GET',
         headers: {
           'Contetn-Type': 'application/json',
@@ -106,7 +106,7 @@ const Profile = ({profilePic}:{profilePic: string}) => {
     const token = Cookies.get('token');
 
     try {
-        const response = await fetch(`http://localhost:3000/users/${id}`, {
+        const response = await fetch(`https://geotagger.adaptable.app/users/${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -123,7 +123,7 @@ const Profile = ({profilePic}:{profilePic: string}) => {
         setIme(userData.username)
         
       
-        const locationsData = await fetch(`http://localhost:3000/locations/user/${id}`,{
+        const locationsData = await fetch(`https://geotagger.adaptable.app/locations/user/${id}`,{
           method: 'GET',
           headers: {
             'Contetn-Type': 'application/json',

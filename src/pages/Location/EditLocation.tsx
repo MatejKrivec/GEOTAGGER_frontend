@@ -71,7 +71,7 @@ const EditLocation = ({ Close, LocationToEdit }: { Close: () => void; LocationTo
       formData.append('locationID', locationID);
       formData.append('key', 'Locations/');
 
-      const response = await fetch('http://localhost:3000/aws/edit-location-pic', {
+      const response = await fetch('https://geotagger.adaptable.app/aws/edit-location-pic', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -89,7 +89,7 @@ const EditLocation = ({ Close, LocationToEdit }: { Close: () => void; LocationTo
     }
 
     if (Object.keys(data).length > 0) {
-      const update = await fetch(`http://localhost:3000/locations/${locationID}`, {
+      const update = await fetch(`https://geotagger.adaptable.app/locations/${locationID}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

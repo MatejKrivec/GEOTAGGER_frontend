@@ -47,7 +47,7 @@ const AddLocation = ({Close}: {Close: () => void}) => {
             const key = 'Locations/'
             formData.append('key', key);
         
-            const response = await fetch('http://localhost:3000/aws/upload-location-pic', {
+            const response = await fetch('https://geotagger.adaptable.app/aws/upload-location-pic', {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -65,7 +65,7 @@ const AddLocation = ({Close}: {Close: () => void}) => {
             const date = Date.now()
             const datetime= new Date(date).toISOString();
 
-            const create = await fetch('http://localhost:3000/locations', {
+            const create = await fetch('https://geotagger.adaptable.app/locations', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

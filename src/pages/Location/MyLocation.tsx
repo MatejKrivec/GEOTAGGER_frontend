@@ -26,7 +26,7 @@ const MyLocation = ({ EditVisable, location }: LocationProps) => {
 
       try {
 
-        const deleteLocationPhoto = await fetch(`http://localhost:3000/aws/${location.id}`,{
+        const deleteLocationPhoto = await fetch(`https://geotagger.adaptable.app/aws/${location.id}`,{
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
@@ -42,7 +42,7 @@ const MyLocation = ({ EditVisable, location }: LocationProps) => {
 
       
 
-        const deleteLocation = await fetch(`http://localhost:3000/locations/${location.id}`,{
+        const deleteLocation = await fetch(`https://geotagger.adaptable.app/locations/${location.id}`,{
           method: "DELETE",
           headers: {
             'Content-Type': 'application/json',
