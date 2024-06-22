@@ -22,7 +22,7 @@ export interface LocationInterface {
   export const api = createApi({
     reducerPath: 'api',
     baseQuery: fetchBaseQuery({
-      baseUrl: 'http://localhost:3000/',
+      baseUrl: 'https://geotagger.adaptable.app/',
       prepareHeaders: (headers) => {
         const token = Cookies.get('token'); 
       if (token) {
